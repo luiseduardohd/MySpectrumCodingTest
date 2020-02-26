@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Specialized;
-
 using Foundation;
+using MySpectrumCodingTest.iOS.ViewControllers.DetailViewControllers;
+using System;
+using System.Collections.Specialized;
 using UIKit;
 
 namespace MySpectrumCodingTest.iOS
 {
-    public partial class BrowseViewController : UITableViewController
+    public partial class UsersViewController : UITableViewController
     {
         UIRefreshControl refreshControl;
 
-        public ItemsViewModel ViewModel { get; set; }
+        public UsersViewModel ViewModel { get; set; }
 
-        public BrowseViewController(IntPtr handle) : base(handle)
+        public UsersViewController(IntPtr handle) : base(handle)
         {
         }
 
@@ -20,7 +20,7 @@ namespace MySpectrumCodingTest.iOS
         {
             base.ViewDidLoad();
 
-            ViewModel = new ItemsViewModel();
+            ViewModel = new UsersViewModel();
 
             // Setup UITableView.
             refreshControl = new UIRefreshControl();
@@ -31,30 +31,30 @@ namespace MySpectrumCodingTest.iOS
             Title = ViewModel.Title;
 
             ViewModel.PropertyChanged += IsBusy_PropertyChanged;
-            ViewModel.Items.CollectionChanged += Items_CollectionChanged;
+            ViewModel.Users.CollectionChanged += Items_CollectionChanged;
         }
 
         public override void ViewDidAppear(bool animated)
         {
             base.ViewDidAppear(animated);
 
-            if (ViewModel.Items.Count == 0)
-                ViewModel.LoadItemsCommand.Execute(null);
+            if (ViewModel.Users.Count == 0)
+                ViewModel.LoadUsersCommand.Execute(null);
         }
 
         public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)
         {
             if (segue.Identifier == "NavigateToItemDetailSegue")
             {
-                var controller = segue.DestinationViewController as BrowseItemDetailViewController;
+                var controller = segue.DestinationViewController as BrowseUserDetailViewController;
                 var indexPath = TableView.IndexPathForCell(sender as UITableViewCell);
-                var item = ViewModel.Items[indexPath.Row];
+                var item = ViewModel.Users[indexPath.Row];
 
-                controller.ViewModel = new ItemDetailViewModel(item);
+                controller.ViewModel = new UserDetailViewModel(item);
             }
             else
             {
-                var controller = segue.DestinationViewController as ItemNewViewController;
+                var controller = segue.DestinationViewController as UserNewViewController;
                 controller.ViewModel = ViewModel;
             }
         }
@@ -62,7 +62,7 @@ namespace MySpectrumCodingTest.iOS
         void RefreshControl_ValueChanged(object sender, EventArgs e)
         {
             if (!ViewModel.IsBusy && refreshControl.Refreshing)
-                ViewModel.LoadItemsCommand.Execute(null);
+                ViewModel.LoadUsersCommand.Execute(null);
         }
 
         void IsBusy_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -94,23 +94,23 @@ namespace MySpectrumCodingTest.iOS
     {
         static readonly NSString CELL_IDENTIFIER = new NSString("ITEM_CELL");
 
-        ItemsViewModel viewModel;
+        UsersViewModel viewModel;
 
-        public ItemsDataSource(ItemsViewModel viewModel)
+        public ItemsDataSource(UsersViewModel viewModel)
         {
             this.viewModel = viewModel;
         }
 
-        public override nint RowsInSection(UITableView tableview, nint section) => viewModel.Items.Count;
+        public override nint RowsInSection(UITableView tableview, nint section) => viewModel.Users.Count;
         public override nint NumberOfSections(UITableView tableView) => 1;
 
         public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
         {
             var cell = tableView.DequeueReusableCell(CELL_IDENTIFIER, indexPath);
 
-            var item = viewModel.Items[indexPath.Row];
-            cell.TextLabel.Text = item.Text;
-            cell.DetailTextLabel.Text = item.Description;
+            var item = viewModel.Users[indexPath.Row];
+            cell.TextLabel.Text = $"User name: {item.Text}";
+            cell.DetailTextLabel.Text = $"User details: {item.Description}";
             cell.LayoutMargins = UIEdgeInsets.Zero;
 
             return cell;

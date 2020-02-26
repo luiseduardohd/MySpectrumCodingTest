@@ -1,4 +1,5 @@
-﻿using System;
+﻿/*
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http;
@@ -23,7 +24,7 @@ namespace MySpectrumCodingTest
             items = new List<Item>();
         }
 
-        public async Task<IEnumerable<Item>> GetItemsAsync(bool forceRefresh = false)
+        public async Task<IEnumerable<Item>> GetAllAsync(bool forceRefresh = false)
         {
             if (forceRefresh && CrossConnectivity.Current.IsConnected)
             {
@@ -34,7 +35,7 @@ namespace MySpectrumCodingTest
             return items;
         }
 
-        public async Task<Item> GetItemAsync(string id)
+        public async Task<Item> GetAsync(string id)
         {
             if (id != null && CrossConnectivity.Current.IsConnected)
             {
@@ -45,7 +46,7 @@ namespace MySpectrumCodingTest
             return null;
         }
 
-        public async Task<bool> AddItemAsync(Item item)
+        public async Task<bool> AddAsync(Item item)
         {
             if (item == null || !CrossConnectivity.Current.IsConnected)
                 return false;
@@ -57,7 +58,7 @@ namespace MySpectrumCodingTest
             return response.IsSuccessStatusCode;
         }
 
-        public async Task<bool> UpdateItemAsync(Item item)
+        public async Task<bool> UpdateAsync(Item item)
         {
             if (item == null || item.Id == null || !CrossConnectivity.Current.IsConnected)
                 return false;
@@ -71,7 +72,7 @@ namespace MySpectrumCodingTest
             return response.IsSuccessStatusCode;
         }
 
-        public async Task<bool> DeleteItemAsync(string id)
+        public async Task<bool> DeleteAsync(string id)
         {
             if (string.IsNullOrEmpty(id) && !CrossConnectivity.Current.IsConnected)
                 return false;
@@ -82,3 +83,4 @@ namespace MySpectrumCodingTest
         }
     }
 }
+*/

@@ -13,7 +13,7 @@ namespace MySpectrumCodingTest.Droid
         FloatingActionButton saveButton;
         EditText title, description;
 
-        public ItemsViewModel ViewModel { get; set; }
+        public UsersViewModel ViewModel { get; set; }
 
         protected override void OnCreate(Bundle savedInstanceState)
         {

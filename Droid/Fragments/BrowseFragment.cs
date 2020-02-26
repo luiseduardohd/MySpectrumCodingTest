@@ -18,7 +18,7 @@ namespace MySpectrumCodingTest.Droid
         SwipeRefreshLayout refresher;
 
         ProgressBar progress;
-        public static ItemsViewModel ViewModel { get; set; }
+        public static UsersViewModel ViewModel { get; set; }
 
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -29,7 +29,7 @@ namespace MySpectrumCodingTest.Droid
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            ViewModel = new ItemsViewModel();
+            ViewModel = new UsersViewModel();
 
             View view = inflater.Inflate(Resource.Layout.fragment_browse, container, false);
             var recyclerView =
@@ -88,10 +88,10 @@ namespace MySpectrumCodingTest.Droid
 
     class BrowseItemsAdapter : BaseRecycleViewAdapter
     {
-        ItemsViewModel viewModel;
+        UsersViewModel viewModel;
         Activity activity;
 
-        public BrowseItemsAdapter(Activity activity, ItemsViewModel viewModel)
+        public BrowseItemsAdapter(Activity activity, UsersViewModel viewModel)
         {
             this.viewModel = viewModel;
             this.activity = activity;

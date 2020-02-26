@@ -9,10 +9,10 @@ using System;
 using System.CodeDom.Compiler;
 using UIKit;
 
-namespace MySpectrumCodingTest.iOS
+namespace MySpectrumCodingTest.iOS.ViewControllers.DetailViewControllers
 {
-    [Register("ItemDetailViewController")]
-    partial class BrowseItemDetailViewController
+    [Register("BrowseUserDetailViewController")]
+    partial class BrowseUserDetailViewController
     {
         [Outlet]
         [GeneratedCode("iOS Designer", "1.0")]

@@ -5,61 +5,56 @@ using System.Threading.Tasks;
 
 namespace MySpectrumCodingTest
 {
-    public class MockDataStore : IDataStore<Item>
+    public class UsersInMemoryDataStore : IDataStore<User>
     {
-        List<Item> items;
+        List<User> users;
 
-        public MockDataStore()
+        public UsersInMemoryDataStore()
         {
-            items = new List<Item>();
-            var _items = new List<Item>
+            users = new List<User>();
+            var _users = new List<User>
             {
-                new Item { Id = Guid.NewGuid().ToString(), Text = "First item", Description="This is a nice description"},
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Second item", Description="This is a nice description"},
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Third item", Description="This is a nice description"},
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Fourth item", Description="This is a nice description"},
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Fifth item", Description="This is a nice description"},
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Sixth item", Description="This is a nice description"},
             };
 
-            foreach (Item item in _items)
+            foreach (User user in _users)
             {
-                items.Add(item);
+                users.Add(user);
             }
         }
 
-        public async Task<bool> AddItemAsync(Item item)
+        public async Task<bool> AddAsync(User user)
         {
-            items.Add(item);
+            users.Add(user);
 
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> UpdateItemAsync(Item item)
+        public async Task<bool> UpdateAsync(User user)
         {
-            var _item = items.Where((Item arg) => arg.Id == item.Id).FirstOrDefault();
-            items.Remove(_item);
-            items.Add(item);
+            var _user = users.Where((User arg) => arg.Id == user.Id).FirstOrDefault();
+            users.Remove(_user);
+            users.Add(user);
 
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> DeleteItemAsync(string id)
+        public async Task<bool> DeleteAsync(string id)
         {
-            var _item = items.Where((Item arg) => arg.Id == id).FirstOrDefault();
-            items.Remove(_item);
+            var _user = users.Where((User arg) => arg.Id == id).FirstOrDefault();
+            users.Remove(_user);
 
             return await Task.FromResult(true);
         }
 
-        public async Task<Item> GetItemAsync(string id)
+        public async Task<User> GetAsync(string id)
         {
-            return await Task.FromResult(items.FirstOrDefault(s => s.Id == id));
+            return await Task.FromResult(users.FirstOrDefault(s => s.Id == id));
         }
 
-        public async Task<IEnumerable<Item>> GetItemsAsync(bool forceRefresh = false)
+        public async Task<IEnumerable<User>> GetAllAsync(bool forceRefresh = false)
         {
-            return await Task.FromResult(items);
+            return await Task.FromResult(users);
         }
+
     }
 }
