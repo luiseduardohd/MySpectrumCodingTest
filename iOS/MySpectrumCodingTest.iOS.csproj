@@ -145,6 +145,10 @@
     <Compile Include="ViewControllers\LoginViewController.designer.cs">
       <DependentUpon>LoginViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="ViewControllers\CreateUsernameViewController.cs" />
+    <Compile Include="ViewControllers\CreateUsernameViewController.designer.cs">
+      <DependentUpon>CreateUsernameViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Entitlements.plist" />
@@ -154,6 +158,7 @@
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
     <InterfaceDefinition Include="Main.storyboard" />
+    <InterfaceDefinition Include="ViewControllers\CreateUsernameViewController.xib" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets.xcassets\SpectrumLogo.imageset\" />
