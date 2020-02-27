@@ -115,6 +115,8 @@
     <ImageAsset Include="Assets.xcassets\XamarinLogo.imageset\xamarin_logo%402x.png" />
     <ImageAsset Include="Assets.xcassets\XamarinLogo.imageset\xamarin_logo%403x.png" />
     <ImageAsset Include="Assets.xcassets\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\SpectrumLogo.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\SpectrumLogo.imageset\spectrum-logo.pdf" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ViewControllers\AboutViewController.cs" />
@@ -139,6 +141,10 @@
     <Compile Include="ViewControllers\DetailViewControllers\BrowseUserDetailViewController.designer.cs">
       <DependentUpon>BrowseUserDetailViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="ViewControllers\LoginViewController.cs" />
+    <Compile Include="ViewControllers\LoginViewController.designer.cs">
+      <DependentUpon>LoginViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Entitlements.plist" />
@@ -148,6 +154,10 @@
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
     <InterfaceDefinition Include="Main.storyboard" />
+    <InterfaceDefinition Include="ViewControllers\LoginViewController.xib" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets.xcassets\SpectrumLogo.imageset\" />
   </ItemGroup>
   <Import Project="..\MySpectrumCodingTest\MySpectrumCodingTest.projitems" Label="Shared" Condition="Exists('..\MySpectrumCodingTest\MySpectrumCodingTest.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

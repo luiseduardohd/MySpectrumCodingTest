@@ -8,7 +8,7 @@ namespace MySpectrumCodingTest
         {
             Title = "About";
 
-            OpenWebCommand = new Command(() => Plugin.Share.CrossShare.Current.OpenBrowser("https://xamarin.com/platform"));
+            OpenWebCommand = new Command(() => Plugin.Share.CrossShare.Current.OpenBrowser("https://www.spectrum.net/"));
         }
 
         public ICommand OpenWebCommand { get; }

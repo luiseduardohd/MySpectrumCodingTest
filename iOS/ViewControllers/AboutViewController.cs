@@ -17,9 +17,9 @@ namespace MySpectrumCodingTest.iOS
 
             Title = ViewModel.Title;
 
-            AppNameLabel.Text = "MySpectrumCodingTest";
+            AppNameLabel.Text = "MySpectrum CodingTest";
             VersionLabel.Text = "1.0";
-            AboutTextView.Text = "This app is written in C# and native APIs using the Xamarin Platform. It shares code with its iOS, Android, & Windows versions.";
+            AboutTextView.Text = "This app is written in C# and native APIs using the Xamarin Platform. For coding test Xamarin – Practical Coding Test 02/26/2020";
         }
 
         partial void ReadMoreButton_TouchUpInside(UIButton sender) => ViewModel.OpenWebCommand.Execute(null);
