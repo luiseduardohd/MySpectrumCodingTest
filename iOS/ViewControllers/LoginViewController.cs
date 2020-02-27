@@ -14,7 +14,7 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
         public LoginViewController(IntPtr handle) : base(handle)
         {
         }
-        public LoginViewController() : base("LoginViewController", null)
+        public LoginViewController() : base(nameof(LoginViewController), null)
         {
         }
 

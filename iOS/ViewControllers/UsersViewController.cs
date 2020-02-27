@@ -34,9 +34,12 @@ namespace MySpectrumCodingTest.iOS
             ViewModel.Users.CollectionChanged += Items_CollectionChanged;
 
             bbtnLogout.Clicked += (s, e) => {
-                this.DismissModalViewController(true);
+                //this.DismissModalViewController(true);
+                NSObject sender = s as NSObject;
+                this.PerformSegue("UsersToLogin", s as NSObject);
             };
         }
+       
 
         public override void ViewDidAppear(bool animated)
         {
@@ -56,12 +59,29 @@ namespace MySpectrumCodingTest.iOS
 
                 controller.ViewModel = new UserDetailViewModel(item);
             }
-            else
+            else if (segue.Identifier == "NavigateToNewItemSegue")
             {
                 var controller = segue.DestinationViewController as UserNewViewController;
                 controller.ViewModel = ViewModel;
             }
         }
+        //public override void PrepareForSegue2(UIStoryboardSegue segue, NSObject sender)
+        //{
+        //    base.PrepareForSegue(segue, sender);
+
+        //    //Set up Destination View Controller
+        //    if (segue.Identifier == "loginSegue")
+        //    {
+        //        //var itvc = (IncidentTVC)segue.DestinationViewController;
+        //        //if (itvc != null)
+        //        //{
+        //        //    itvc.setUser(this, currentUser);
+
+        //        //}
+        //    }
+
+
+        //}
 
         void RefreshControl_ValueChanged(object sender, EventArgs e)
         {
