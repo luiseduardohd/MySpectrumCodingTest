@@ -154,7 +154,6 @@
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
     <InterfaceDefinition Include="Main.storyboard" />
-    <InterfaceDefinition Include="ViewControllers\LoginViewController.xib" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets.xcassets\SpectrumLogo.imageset\" />
