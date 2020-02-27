@@ -19,7 +19,20 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
         {
             base.ViewDidLoad();
             // Perform any additional setup after loading the view, typically from a nib.
+            btnCreateUsername.TouchUpInside += (object sender, EventArgs e) =>
+            {
+                this.PerformSegue("LoginPerformed", sender as NSObject);
+            };
+            btnSignIn.TouchUpInside += (object sender, EventArgs e) =>
+            {
+                this.PerformSegue("LoginPerformed", sender as NSObject);
+            };
+            btnTroubleSigningIn.TouchUpInside += (object sender, EventArgs e) =>
+            {
+                this.PerformSegue("LoginPerformed", sender as NSObject);
+            };
         }
+
 
         public override void DidReceiveMemoryWarning()
         {
