@@ -32,6 +32,10 @@ namespace MySpectrumCodingTest.iOS
 
             ViewModel.PropertyChanged += IsBusy_PropertyChanged;
             ViewModel.Users.CollectionChanged += Items_CollectionChanged;
+
+            bbtnLogout.Clicked += (s, e) => {
+                this.DismissModalViewController(true);
+            };
         }
 
         public override void ViewDidAppear(bool animated)
@@ -88,6 +92,8 @@ namespace MySpectrumCodingTest.iOS
         {
             InvokeOnMainThread(() => TableView.ReloadData());
         }
+
+        
     }
 
     class ItemsDataSource : UITableViewSource

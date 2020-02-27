@@ -15,15 +15,23 @@ namespace MySpectrumCodingTest.iOS
     partial class UsersViewController
     {
         [Outlet]
-        [GeneratedCode("iOS Designer", "1.0")]
-        UIKit.UIButton btnAddItem { get; set; }
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton bbtnAddUser { get; set; }
 
-        void ReleaseDesignerOutlets()
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIBarButtonItem bbtnLogout { get; set; }
+
+        void ReleaseDesignerOutlets ()
         {
-            if (btnAddItem != null)
-            {
-                btnAddItem.Dispose();
-                btnAddItem = null;
+            if (bbtnAddUser != null) {
+                bbtnAddUser.Dispose ();
+                bbtnAddUser = null;
+            }
+
+            if (bbtnLogout != null) {
+                bbtnLogout.Dispose ();
+                bbtnLogout = null;
             }
         }
     }

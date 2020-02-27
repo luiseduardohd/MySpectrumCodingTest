@@ -99,6 +99,11 @@
     <Reference Include="PropertyChanged">
       <HintPath>..\packages\PropertyChanged.Fody.3.2.6\lib\netstandard1.0\PropertyChanged.dll</HintPath>
     </Reference>
+    <Reference Include="Xamarin.Essentials">
+      <HintPath>..\packages\Xamarin.Essentials.1.5.0\lib\xamarinios10\Xamarin.Essentials.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK-1.0" />
+    <Reference Include="System.Drawing.Common.dll" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />
@@ -149,6 +154,8 @@
     <Compile Include="ViewControllers\CreateUsernameViewController.designer.cs">
       <DependentUpon>CreateUsernameViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="Security\KeyChainHelper.cs" />
+    <Compile Include="Security\SecurityConstants.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Entitlements.plist" />
@@ -158,10 +165,10 @@
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
     <InterfaceDefinition Include="Main.storyboard" />
-    <InterfaceDefinition Include="ViewControllers\CreateUsernameViewController.xib" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets.xcassets\SpectrumLogo.imageset\" />
+    <Folder Include="Security\" />
   </ItemGroup>
   <Import Project="..\MySpectrumCodingTest\MySpectrumCodingTest.projitems" Label="Shared" Condition="Exists('..\MySpectrumCodingTest\MySpectrumCodingTest.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

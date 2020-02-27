@@ -20,6 +20,23 @@ namespace MySpectrumCodingTest.iOS
         {
             App.Initialize();
 
+            //if ( UIDevice.CurrentDevice.CheckSystemVersion(13, 0) ){
+            //    var appearance = new UINavigationBarAppearance();
+            //    appearance.BackgroundColor = UIColor.Purple;
+            //    appearance.TitleTextAttributes = new UIStringAttributes(){ ForegroundColor = UIColor.White };
+            //    appearance.LargeTitleTextAttributes = new UIStringAttributes() { ForegroundColor = UIColor.White }; 
+
+            //    UINavigationBar.Appearance.TintColor = UIColor.White;
+            //    UINavigationBar.Appearance.StandardAppearance = appearance;
+            //    UINavigationBar.Appearance.CompactAppearance = appearance;
+            //    UINavigationBar.Appearance.ScrollEdgeAppearance = appearance;
+            //    //navigationController?.navigationBar.prefersLargeTitles =
+            //}
+            //else {
+            //    UINavigationBar.Appearance.TintColor = UIColor.White;
+            //    UINavigationBar.Appearance.BarTintColor = UIColor.Purple;
+            //    UINavigationBar.Appearance.Translucent = false;
+            //}
 
 
             return true;

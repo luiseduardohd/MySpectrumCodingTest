@@ -2,7 +2,10 @@
 
 using System;
 using Foundation;
+using MySpectrumCodingTest.iOS.Security;
 using UIKit;
+using Xamarin.Essentials;
+using iOSSecurity = Security;
 
 namespace MySpectrumCodingTest.iOS.ViewControllers
 {
@@ -15,13 +18,45 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
         {
         }
 
-        public override void ViewDidLoad()
+        public override async void ViewDidLoad()
         {
             base.ViewDidLoad();
             // Perform any additional setup after loading the view, typically from a nib.
+
+            //if (UIDevice.CurrentDevice.CheckSystemVersion(11, 0))
+            //{
+            //    var navBar = NavigationController.NavigationBar;
+            //    navBar.LeadingAnchor.ConstraintEqualTo( View.LeadingAnchor).Active = true;
+            //    navBar.TrailingAnchor.ConstraintEqualTo( View.TrailingAnchor).Active = true;
+            //    navBar.TopAnchor.ConstraintEqualTo( View.SafeAreaLayoutGuide.TopAnchor).Active = true;
+            //    navBar.HeightAnchor.ConstraintEqualTo(64).Active = true;
+            //}
+            //if (UIDevice.CurrentDevice.CheckSystemVersion(11, 0))
+            //{
+            //    if ( this.NavigationController != null )
+            //    {
+            //        var navBar = this.NavigationController;
+            //        navBar.NavigationBar.PrefersLargeTitles = true;
+            //    }
+            //}
+            var Username = "";
+            var Password = "";
+            try
+            {
+                Username = await SecureStorage.GetAsync("Username");
+                Password = await SecureStorage.GetAsync("Password");
+            }
+            catch (Exception ex)
+            {
+                // Possible that device doesn't support secure storage on device.
+            }
+
+            txtUsername.Text = Username;
+            txtPassword.Text = Password;
+
             btnCreateUsername.TouchUpInside += (object sender, EventArgs e) =>
             {
-                this.PerformSegue("LoginPerformed", sender as NSObject);
+                this.PerformSegue("CreateUsername", sender as NSObject);
             };
             btnSignIn.TouchUpInside += (object sender, EventArgs e) =>
             {

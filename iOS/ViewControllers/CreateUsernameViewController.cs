@@ -1,11 +1,15 @@
 ﻿using System;
 
 using UIKit;
+using Xamarin.Essentials;
 
 namespace MySpectrumCodingTest.iOS.ViewControllers
 {
     public partial class CreateUsernameViewController : UIViewController
     {
+        public CreateUsernameViewController(IntPtr handle) : base(handle)
+        {
+        }
         public CreateUsernameViewController() : base("CreateUsernameViewController", null)
         {
         }
@@ -13,7 +17,24 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            // Perform any additional setup after loading the view, typically from a nib.
+
+            bbtnCancel.Clicked += (s, e) => {
+                this.DismissModalViewController(true);
+            };
+            btnSaveUser.TouchUpInside += async (s, e) => {
+                try
+                {
+
+                    var Username = txtEmail.Text;
+                    var Password = txtPassword.Text;
+                    await SecureStorage.SetAsync("Username", Username);
+                    await SecureStorage.SetAsync("Password", Password);
+                }
+                catch (Exception ex)
+                {
+                }
+                this.DismissModalViewController(true);
+            };
         }
 
         public override void DidReceiveMemoryWarning()
