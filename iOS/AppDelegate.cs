@@ -1,4 +1,5 @@
 ﻿using Foundation;
+using MySpectrumCodingTest.iOS.ViewControllers;
 using UIKit;
 
 namespace MySpectrumCodingTest.iOS
@@ -20,6 +21,20 @@ namespace MySpectrumCodingTest.iOS
         {
             App.Initialize();
 
+
+            // create a new window instance based on the screen size
+            Window = new UIWindow(UIScreen.MainScreen.Bounds);
+
+
+            //Window.RootViewController = new LoginViewController();
+
+            //// make the window visible
+            //Window.MakeKeyAndVisible();
+            Window = new UIWindow(UIScreen.MainScreen.Bounds);
+            var LoginViewController = new LoginViewController();
+            var navigationController = new UINavigationController(LoginViewController);
+            Window.RootViewController = navigationController;
+            Window.MakeKeyAndVisible();
 
 
             return true;

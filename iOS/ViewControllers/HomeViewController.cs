@@ -4,9 +4,9 @@ using UIKit;
 
 namespace MySpectrumCodingTest.iOS.ViewControllers
 {
-    public partial class LoginViewController : UIViewController
+    public partial class HomeViewController : UIViewController
     {
-        public LoginViewController() : base(nameof(LoginViewController), null)
+        public HomeViewController() : base("HomeViewController", null)
         {
         }
 
@@ -14,20 +14,13 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
         {
             base.ViewDidLoad();
             // Perform any additional setup after loading the view, typically from a nib.
-            this.Title = "MySpectrum";
-            this.NavigationController.NavigationBar.Translucent = false;
+            //this.NavigationController.NavigationBar.Hidden = true;
         }
 
         public override void DidReceiveMemoryWarning()
         {
             base.DidReceiveMemoryWarning();
             // Release any cached data, images, etc that aren't in use.
-        }
-
-        partial void SignIn_TouchUpInside(UIButton sender)
-        {
-            var controller = new HomeViewController();
-            this.NavigationController.PresentModalViewController(controller, true);
         }
     }
 }

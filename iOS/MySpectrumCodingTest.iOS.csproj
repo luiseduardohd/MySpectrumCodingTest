@@ -145,6 +145,10 @@
     <Compile Include="ViewControllers\LoginViewController.designer.cs">
       <DependentUpon>LoginViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="ViewControllers\HomeViewController.cs" />
+    <Compile Include="ViewControllers\HomeViewController.designer.cs">
+      <DependentUpon>HomeViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Entitlements.plist" />
@@ -155,6 +159,7 @@
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
     <InterfaceDefinition Include="Main.storyboard" />
     <InterfaceDefinition Include="ViewControllers\LoginViewController.xib" />
+    <InterfaceDefinition Include="ViewControllers\HomeViewController.xib" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets.xcassets\SpectrumLogo.imageset\" />
