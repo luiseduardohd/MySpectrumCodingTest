@@ -131,10 +131,10 @@
             </objects>
             <point key="canvasLocation" x="689" y="-777"/>
         </scene>
-        <!--Login View Controller-->
+        <!--MySpectrum-->
         <scene sceneID="Gtm-LJ-3Xk">
             <objects>
-                <viewController id="Esb-sv-7h6" customClass="LoginViewController" sceneMemberID="viewController">
+                <viewController title="MySpectrum" id="Esb-sv-7h6" customClass="LoginViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2vA-p2-dPl"/>
                         <viewControllerLayoutGuide type="bottom" id="SVS-Z9-dHb"/>
@@ -195,20 +195,13 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Create a Username"/>
                                 <connections>
-                                    <segue destination="4305" kind="presentation" identifier="CreateUsername" modalPresentationStyle="fullScreen" id="UOX-li-XtJ"/>
+                                    <segue id="6668" destination="4305" kind="show" identifier="LoginToCreateUsername"/>
                                 </connections>
                             </button>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="45z-0m-Mns">
-                                <rect key="frame" x="-5" y="0.0" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <navigationItem title="MSpectrum" id="7xV-UH-dHz"/>
-                                </items>
-                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Pp4-AC-8VT"/>
+                    <navigationItem key="navigationItem" title="MySpectrum" id="Pp4-AC-8VT"/>
                     <connections>
                         <outlet property="btnCreateUsername" destination="3070" id="name-outlet-3070"/>
                         <outlet property="btnSignIn" destination="bdi-tJ-Vjr" id="name-outlet-bdi-tJ-Vjr"/>
@@ -292,7 +285,7 @@
                     <navigationItem key="navigationItem" title="Users" id="104">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="5429">
                             <connections>
-                                <segue destination="Esb-sv-7h6" kind="presentation" identifier="UsersToLogin" modalPresentationStyle="fullScreen" id="J2A-n1-DwN"/>
+                                <segue destination="jpR-mJ-npz" kind="presentation" identifier="UsersToLogin" modalPresentationStyle="fullScreen" id="4jM-mm-BT5"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" id="2253">
@@ -443,10 +436,10 @@
             </objects>
             <point key="canvasLocation" x="2242" y="-1538"/>
         </scene>
-        <!--Create Username View Controller-->
+        <!--Create Username-->
         <scene sceneID="4304">
             <objects>
-                <viewController id="4305" customClass="CreateUsernameViewController" sceneMemberID="viewController">
+                <viewController title="Create Username" id="4305" customClass="CreateUsernameViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4302"/>
                         <viewControllerLayoutGuide type="bottom" id="4303"/>
@@ -456,8 +449,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4315">
-                                <rect key="frame" x="0.0" y="51" width="375" height="616"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" heightSizable="YES" widthSizable="YES"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4312">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="74"/>
@@ -512,7 +505,7 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Text" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5667">
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5667">
                                                         <rect key="frame" x="16" y="110" width="335" height="30"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -566,7 +559,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
-                                                <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" colorSpace="calibratedRGB" red="0.93725490196078431" green="0.96470588235294119" blue="0.996078431372549" alpha="1"/>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5437">
                                                 <rect key="frame" x="61" y="433" width="234" height="30"/>
@@ -579,14 +572,15 @@
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <color key="backgroundColor" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace" white="1" alpha="1"/>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                <color key="backgroundColor" colorSpace="calibratedRGB" red="0.97647058823529409" green="0.97647058823529409" blue="0.984313725490196" alpha="1"/>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                        <color key="backgroundColor" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace" white="0.9725490196" alpha="1"/>
                     </view>
+                    <navigationItem key="navigationItem" title="MySpectrum" id="Tap-7a-Hev"/>
                     <connections>
                         <outlet property="btnSaveUser" destination="5437" id="name-outlet-5437"/>
                         <outlet property="lblConfirmPassword" destination="5668" id="name-outlet-5668"/>
@@ -597,7 +591,6 @@
                         <outlet property="txtEmail" destination="5667" id="name-outlet-5667"/>
                         <outlet property="txtPassword" destination="5436" id="name-outlet-5436"/>
                     </connections>
-                    <navigationItem key="navigationItem" id="6860"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4307" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -631,7 +624,6 @@
         <image name="SpectrumLogo" width="225" height="168.75"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="CHT-98-MdS"/>
         <segue reference="8pa-GW-2sY"/>
     </inferredMetricsTieBreakers>
 </document>

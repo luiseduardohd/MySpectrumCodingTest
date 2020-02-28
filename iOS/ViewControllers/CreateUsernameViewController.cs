@@ -32,6 +32,7 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
                 }
                 catch (Exception ex)
                 {
+                    
                 }
                 this.DismissModalViewController(true);
             };

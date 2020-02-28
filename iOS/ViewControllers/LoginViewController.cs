@@ -48,16 +48,13 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
             }
             catch (Exception ex)
             {
-                // Possible that device doesn't support secure storage on device.
+                
             }
 
             txtUsername.Text = Username;
             txtPassword.Text = Password;
 
-            btnCreateUsername.TouchUpInside += (object sender, EventArgs e) =>
-            {
-                this.PerformSegue("CreateUsername", sender as NSObject);
-            };
+            
             btnSignIn.TouchUpInside += (object sender, EventArgs e) =>
             {
                 this.PerformSegue("LoginPerformed", sender as NSObject);
@@ -72,7 +69,6 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
         public override void DidReceiveMemoryWarning()
         {
             base.DidReceiveMemoryWarning();
-            // Release any cached data, images, etc that aren't in use.
         }
     }
 }
