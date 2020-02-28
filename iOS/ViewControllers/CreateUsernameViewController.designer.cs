@@ -16,10 +16,6 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
     {
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIBarButtonItem bbtnCancel { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton btnSaveUser { get; set; }
 
         [Outlet]
@@ -52,11 +48,6 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
 
         void ReleaseDesignerOutlets ()
         {
-            if (bbtnCancel != null) {
-                bbtnCancel.Dispose ();
-                bbtnCancel = null;
-            }
-
             if (btnSaveUser != null) {
                 btnSaveUser.Dispose ();
                 btnSaveUser = null;

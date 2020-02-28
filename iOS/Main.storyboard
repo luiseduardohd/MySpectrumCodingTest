@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="jpR-mJ-npz">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -456,24 +455,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4309">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <navigationItem title="Title" id="4310">
-                                        <barButtonItem key="rightBarButtonItem" title="Cancel" id="7106"/>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4315" fixedFrame="YES">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4315">
                                 <rect key="frame" x="0.0" y="51" width="375" height="616"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4312" fixedFrame="YES">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4312">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="74"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4316" fixedFrame="YES">
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4316">
                                         <rect key="frame" x="8" y="82" width="359" height="507"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Confirm Your Account" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4313">
                                                 <rect key="frame" x="8" y="8" width="343" height="21"/>
@@ -588,38 +580,41 @@
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                     </view>
                     <connections>
-                        <outlet property="bbtnCancel" destination="7106" id="name-outlet-7106"/>
                         <outlet property="btnSaveUser" destination="5437" id="name-outlet-5437"/>
                         <outlet property="lblConfirmPassword" destination="5668" id="name-outlet-5668"/>
+                        <outlet property="lblEmailError" destination="5959" id="name-outlet-5959"/>
                         <outlet property="lblPasswordError" destination="5665" id="name-outlet-5665"/>
                         <outlet property="lblUserNameError" destination="5664" id="name-outlet-5664"/>
+                        <outlet property="txtConfirmPassword" destination="5434" id="name-outlet-5434"/>
                         <outlet property="txtEmail" destination="5667" id="name-outlet-5667"/>
                         <outlet property="txtPassword" destination="5436" id="name-outlet-5436"/>
-                        <outlet property="txtConfirmPassword" destination="5434" id="name-outlet-5434"/>
-                        <outlet property="lblEmailError" destination="5959" id="name-outlet-5959"/>
                     </connections>
+                    <navigationItem key="navigationItem" id="6860"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4307" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1049" y="804"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--MySpectrum-->
         <scene sceneID="hdl-DC-46k">
             <objects>
-                <navigationController id="jpR-mJ-npz" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="G8f-vA-Q6e">
-                        <rect key="frame" x="0.0" y="20" width="375" height="102"/>
+                <navigationController title="MySpectrum" automaticallyAdjustsScrollViewInsets="NO" id="jpR-mJ-npz" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="G8f-vA-Q6e">
+                        <rect key="frame" x="0.0" y="20" width="375" height="50"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.1137254902" green="0.50196078430000002" blue="0.93725490199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="Esb-sv-7h6" kind="relationship" relationship="rootViewController" id="CHT-98-MdS"/>
@@ -627,7 +622,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="osn-dc-FuX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2146" y="-106"/>
+            <point key="canvasLocation" x="-2234" y="-48"/>
         </scene>
     </scenes>
     <resources>
@@ -637,6 +632,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="CHT-98-MdS"/>
-        <segue reference="UmP-kX-ZTR"/>
+        <segue reference="8pa-GW-2sY"/>
     </inferredMetricsTieBreakers>
 </document>

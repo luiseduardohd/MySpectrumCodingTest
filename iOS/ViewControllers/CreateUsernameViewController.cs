@@ -18,9 +18,9 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
         {
             base.ViewDidLoad();
 
-            bbtnCancel.Clicked += (s, e) => {
-                this.DismissModalViewController(true);
-            };
+            //bbtnCancel.Clicked += (s, e) => {
+            //    this.DismissModalViewController(true);
+            //};
             btnSaveUser.TouchUpInside += async (s, e) => {
                 try
                 {
