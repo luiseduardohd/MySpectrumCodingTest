@@ -568,7 +568,7 @@
                                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <segue destination="49e-Tb-3d3" kind="presentation" identifier="CreateUserToUsers" modalPresentationStyle="fullScreen" id="UmP-kX-ZTR"/>
+                                                    <segue destination="49e-Tb-3d3" kind="presentation" identifier="CreateUsernameToUsers" modalPresentationStyle="fullScreen" id="UmP-kX-ZTR"/>
                                                 </connections>
                                             </button>
                                         </subviews>

@@ -23,5 +23,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\InitialViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SettingsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\LoginViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\CreateUsernameViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Base\BaseViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Base\" />
   </ItemGroup>
 </Project>

@@ -66,7 +66,7 @@ namespace MySpectrumCodingTest.iOS
             {
                 var user = new User
                 {
-                    Text = txtTitle.Text,
+                    Username = txtTitle.Text,
                     Description = txtDesc.Text
                 };
                 ViewModel.AddUserCommand.Execute(user);

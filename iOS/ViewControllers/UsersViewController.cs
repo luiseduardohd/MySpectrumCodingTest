@@ -33,13 +33,14 @@ namespace MySpectrumCodingTest.iOS
             ViewModel.PropertyChanged += IsBusy_PropertyChanged;
             ViewModel.Users.CollectionChanged += Items_CollectionChanged;
 
-            bbtnLogout.Clicked += (s, e) => {
+            bbtnLogout.Clicked += (s, e) =>
+            {
                 //this.DismissModalViewController(true);
                 NSObject sender = s as NSObject;
                 this.PerformSegue("UsersToLogin", s as NSObject);
             };
         }
-       
+
 
         public override void ViewDidAppear(bool animated)
         {
@@ -113,7 +114,7 @@ namespace MySpectrumCodingTest.iOS
             InvokeOnMainThread(() => TableView.ReloadData());
         }
 
-        
+
     }
 
     class ItemsDataSource : UITableViewSource
@@ -135,7 +136,7 @@ namespace MySpectrumCodingTest.iOS
             var cell = tableView.DequeueReusableCell(CELL_IDENTIFIER, indexPath);
 
             var item = viewModel.Users[indexPath.Row];
-            cell.TextLabel.Text = $"User name: {item.Text}";
+            cell.TextLabel.Text = $"User name: {item.Username}";
             cell.DetailTextLabel.Text = $"User details: {item.Description}";
             cell.LayoutMargins = UIEdgeInsets.Zero;
 

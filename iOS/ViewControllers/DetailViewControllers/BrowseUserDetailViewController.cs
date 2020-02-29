@@ -14,7 +14,7 @@ namespace MySpectrumCodingTest.iOS.ViewControllers.DetailViewControllers
             base.ViewDidLoad();
 
             Title = ViewModel.Title;
-            ItemNameLabel.Text = ViewModel.User.Text;
+            ItemNameLabel.Text = ViewModel.User.Username;
             ItemDescriptionLabel.Text = ViewModel.User.Description;
         }
     }

@@ -39,6 +39,16 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
             //        navBar.NavigationBar.PrefersLargeTitles = true;
             //    }
             //}
+            try
+            {
+
+                await SecureStorage.SetAsync("Username", "luiseduardohd");
+                await SecureStorage.SetAsync("Password", "Password1xyz");
+            }
+            catch (Exception ex)
+            {
+
+            }
             var Username = "";
             var Password = "";
             try
@@ -61,6 +71,8 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
             };
             btnTroubleSigningIn.TouchUpInside += (object sender, EventArgs e) =>
             {
+                //TODO: validation
+                //TODO: user can login with username, accounNumber and email.
                 this.PerformSegue("LoginPerformed", sender as NSObject);
             };
         }
