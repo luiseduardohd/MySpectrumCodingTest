@@ -1,4 +1,5 @@
 ﻿using System;
+using MySpectrumCodingTest.Models;
 
 namespace MySpectrumCodingTest
 {
@@ -7,7 +8,7 @@ namespace MySpectrumCodingTest
         Admin,
         RegularUser
     }
-    public class User
+    public class User : Entity
     {
         public string AccountNumber { get; set; }
         public string Username { get; set; }

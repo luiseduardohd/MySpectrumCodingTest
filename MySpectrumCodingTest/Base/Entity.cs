@@ -1,5 +1,5 @@
 ﻿using System;
-namespace MySpectrumCodingTest.Base
+namespace MySpectrumCodingTest.Models
 {
     public class Entity
     {
