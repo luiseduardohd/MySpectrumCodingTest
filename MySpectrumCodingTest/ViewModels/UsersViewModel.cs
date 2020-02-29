@@ -29,7 +29,7 @@ namespace MySpectrumCodingTest
             try
             {
                 Users.Clear();
-                var users = await DataStore.GetAllAsync(true);
+                var users = await UsersDataStore.GetAllAsync(true);
                 foreach (var user in users)
                 {
                     Users.Add(user);
@@ -48,7 +48,7 @@ namespace MySpectrumCodingTest
         async Task AddUser(User user)
         {
             Users.Add(user);
-            await DataStore.AddAsync(user);
+            await UsersDataStore.AddAsync(user);
         }
     }
 }

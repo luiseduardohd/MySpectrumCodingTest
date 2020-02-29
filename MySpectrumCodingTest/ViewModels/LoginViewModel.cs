@@ -1,72 +1,32 @@
 ﻿using System;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Threading.Tasks;
 
 namespace MySpectrumCodingTest.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
         #region Fields
+        public string UserName { get; set; }
+        public string Password { get; set; }
 
-        private string _password;
-        private string _userName;
-        private string _companyCode;
-        private string _deviceIdentifier;
+        public ObservableCollection<User> Users { get; set; }
+        public Command LoginCommand { get; private set; }
+
         #endregion
 
         public LoginViewModel(Action completeAction)
         {
+
         }
 
-
-        public string UserName
+        private async Task<bool> Login()
         {
-            get
-            {
-                return _userName;
-            }
-            set
-            {
-                SetProperty(ref _userName, value);
-            }
+            bool success = false;
+
+
+            return success;
         }
-
-        public string Password
-        {
-            get
-            {
-                return _password;
-            }
-
-            set
-            {
-                SetProperty(ref _password, value);
-            }
-        }
-
-        public string CompanyCode
-        {
-            get
-            {
-                return _companyCode;
-            }
-
-            set
-            {
-                SetProperty(ref _companyCode, value);
-            }
-        }
-
-        public string DeviceIdentifier
-        {
-            get
-            {
-                return _deviceIdentifier;
-            }
-
-            set
-            {
-                SetProperty(ref _deviceIdentifier, value);
-            }
-        }
-        
     }
 }

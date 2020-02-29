@@ -7,7 +7,7 @@ namespace MySpectrumCodingTest
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<User> DataStore => ServiceLocator.Instance.Get<IDataStore<User>>() ?? new UsersInMemoryDataStore();
+        public IDataStore<User> UsersDataStore => ServiceLocator.Instance.Get<IDataStore<User>>() ?? new UsersInMemoryDataStore();
 
         bool isBusy = false;
         public bool IsBusy
