@@ -24,11 +24,27 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel lblConfirmPasswordError { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel lblEmail { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UILabel lblEmailError { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel lblPassword { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UILabel lblPasswordError { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel lblUserName { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -46,6 +62,10 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UITextField txtPassword { get; set; }
 
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UITextField txtUsername { get; set; }
+
         void ReleaseDesignerOutlets ()
         {
             if (btnSaveUser != null) {
@@ -58,14 +78,34 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
                 lblConfirmPassword = null;
             }
 
+            if (lblConfirmPasswordError != null) {
+                lblConfirmPasswordError.Dispose ();
+                lblConfirmPasswordError = null;
+            }
+
+            if (lblEmail != null) {
+                lblEmail.Dispose ();
+                lblEmail = null;
+            }
+
             if (lblEmailError != null) {
                 lblEmailError.Dispose ();
                 lblEmailError = null;
             }
 
+            if (lblPassword != null) {
+                lblPassword.Dispose ();
+                lblPassword = null;
+            }
+
             if (lblPasswordError != null) {
                 lblPasswordError.Dispose ();
                 lblPasswordError = null;
+            }
+
+            if (lblUserName != null) {
+                lblUserName.Dispose ();
+                lblUserName = null;
             }
 
             if (lblUserNameError != null) {
@@ -86,6 +126,11 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
             if (txtPassword != null) {
                 txtPassword.Dispose ();
                 txtPassword = null;
+            }
+
+            if (txtUsername != null) {
+                txtUsername.Dispose ();
+                txtUsername = null;
             }
         }
     }

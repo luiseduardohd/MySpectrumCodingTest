@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
 using MvvmCross;
+using MvvmCross.IoC;
 using MvvmCross.Plugin;
 using MvvmCross.ViewModels;
+using MySpectrumCodingTest.ViewModels;
 
 namespace MySpectrumCodingTest
 {
@@ -11,11 +13,22 @@ namespace MySpectrumCodingTest
         MvxApplication
     {
         
-        public static void Initialize()
+        public static void Init()
         {
             ServiceLocator.Instance.Register<IDataStore<User>, UsersInMemoryDataStore>();
         }
-        
+        public override void Initialize()
+        {
+            CreatableTypes()
+                .EndingWith("Service")
+                .AsInterfaces()
+                .RegisterAsLazySingleton();
+
+            //Mvx.IoCProvider.RegisterSingleton<IMvxTextProvider>(new TextProviderBuilder().TextProvider);
+
+            RegisterAppStart<LoginViewModel>();
+        }
+
         //public IMvxViewModelLocator FindViewModelLocator(MvxViewModelRequest request)
         //{
         //    throw new NotImplementedException();

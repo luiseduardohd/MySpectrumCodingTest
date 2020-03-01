@@ -18,7 +18,7 @@ namespace MySpectrumCodingTest.iOS
 
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
-            App.Initialize();
+            App.Init();
 
             //if ( UIDevice.CurrentDevice.CheckSystemVersion(13, 0) ){
             //    var appearance = new UINavigationBarAppearance();

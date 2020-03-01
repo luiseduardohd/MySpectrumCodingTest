@@ -5,20 +5,54 @@ using Xamarin.Essentials;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Foundation;
+using MySpectrumCodingTest.ViewModels;
 
 namespace MySpectrumCodingTest.iOS.ViewControllers
 {
-    public partial class CreateUsernameViewController : UIViewController
+    public partial class CreateUsernameViewController : BaseViewController
     {
-
-        public UsersViewModel ViewModel { get; set; }
+        public CreateUsernameViewModel CreateUsernameViewModel { get; set; }
 
         public CreateUsernameViewController(IntPtr handle) : base(handle)
         {
+            Initialize();
         }
         public CreateUsernameViewController() : base("CreateUsernameViewController", null)
         {
+            Initialize();
         }
+        public void Initialize()
+        {
+            CreateUsernameViewModel = new CreateUsernameViewModel(completeAction,useEmailErrors, usePasswordErrors, useConfirmPasswordErrors);
+        }
+
+        private void useEmailErrors(List<string> errors)
+        {
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                lblEmailError.Text = errors.FirstOrDefault();
+            });
+        }
+        private void usePasswordErrors(List<string> errors)
+        {
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                lblPasswordError.Text = errors.FirstOrDefault();
+            });
+        }
+        private void useConfirmPasswordErrors(List<string> errors)
+        {
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                lblConfirmPasswordError.Text = errors.FirstOrDefault();
+            });
+        }
+
+        private void completeAction(User user)
+        {
+            this.PerformSegue("CreateUsernameToUsers", this);
+        }
+
 
         public override void ViewDidLoad()
         {
@@ -47,7 +81,7 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
                         Username = txtEmail.Text,
                         //Description = txtDesc.Text
                     };
-                    ViewModel.AddUserCommand.Execute(user);
+                    CreateUsernameViewModel.SaveUserCommand.Execute(user);
 
                     var sender = s as NSObject;
                     this.PerformSegue("CreateUsernameToUsers", sender);
@@ -59,9 +93,21 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
 
             };
 
+            txtUsername.AddTarget((s, e) => {
+                UITextField textField = s as UITextField;
+                CreateUsernameViewModel.Username = textField.Text;
+            }, UIControlEvent.EditingChanged);
+            txtEmail.AddTarget((s, e) => {
+                UITextField textField = s as UITextField;
+                CreateUsernameViewModel.Email = textField.Text;
+            }, UIControlEvent.EditingChanged);
             txtPassword.AddTarget((s, e) => {
                 UITextField textField = s as UITextField;
-                validatePassword(textField.Text);
+                CreateUsernameViewModel.Password = textField.Text;
+            }, UIControlEvent.EditingChanged);
+            txtConfirmPassword.AddTarget((s, e) => {
+                UITextField textField = s as UITextField;
+                CreateUsernameViewModel.ConfirmPassword = textField.Text;
             }, UIControlEvent.EditingChanged);
         }
         private void displayAlert(string title, string message)

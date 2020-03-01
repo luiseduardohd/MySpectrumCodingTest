@@ -26,10 +26,13 @@
     <Compile Include="$(MSBuildThisFileDirectory)Base\BaseViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Base\Entity.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Resources\Strings.designer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\ObservableCollectionExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\StringExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Base\" />
     <Folder Include="$(MSBuildThisFileDirectory)Resources\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Extensions\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Strings.resx">

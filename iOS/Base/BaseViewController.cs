@@ -7,6 +7,16 @@ using UIKit;
 namespace MySpectrumCodingTest.iOS.ViewControllers
 {
     //[DoNotNotify]
+    public class BaseViewController : UIViewController
+    {
+
+        public BaseViewController(IntPtr handle) : base(handle)
+        {
+        }
+        public BaseViewController(string nibName, Foundation.NSBundle bundle) : base(nibName, bundle)
+        {
+        }
+    }
     public class BaseViewController
 
         <TViewModel> :
@@ -17,6 +27,7 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
         //    where TViewModel :
         //        class, IMvxViewModel
     {
+        //public ViewModel ViewModel { get; set; } 
         public BaseViewController(IntPtr handle) : base(handle)
         {
         }

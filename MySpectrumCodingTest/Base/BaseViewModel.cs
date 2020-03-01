@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using Acr.UserDialogs;
 using MvvmCross.ViewModels;
 using MySpectrumCodingTest.Resources;
 
@@ -11,6 +12,10 @@ namespace MySpectrumCodingTest
     public abstract class BaseViewModel : MvxViewModel
     {
         public IDataStore<User> UsersDataStore => ServiceLocator.Instance.Get<IDataStore<User>>() ?? new UsersInMemoryDataStore();
+
+        #region UserDialogs 
+        protected IUserDialogs Dialogs { get; } = UserDialogs.Instance;
+        #endregion
 
         bool isBusy = false;
         public bool IsBusy
