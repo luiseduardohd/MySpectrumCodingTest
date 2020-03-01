@@ -2,14 +2,25 @@
 
 using System;
 using Foundation;
+using MvvmCross.Platforms.Ios.Presenters.Attributes;
+using MvvmCross.Platforms.Ios.Views;
 using MySpectrumCodingTest.iOS.Security;
+using MySpectrumCodingTest.ViewModels;
+//using PropertyChanged;
 using UIKit;
 using Xamarin.Essentials;
 using iOSSecurity = Security;
 
 namespace MySpectrumCodingTest.iOS.ViewControllers
 {
-    public partial class LoginViewController : UIViewController
+    //[DoNotNotify]
+    //[MvxFromStoryboard("Main")]
+    //[MvxFromStoryboard("Main")]
+    //[MvxPagePresentation(WrapInNavigationController = false)]
+    public partial class LoginViewController :
+        //MvxViewController<LoginViewModel>
+        BaseViewController
+        <LoginViewModel>
     {
         public LoginViewController(IntPtr handle) : base(handle)
         {
@@ -25,7 +36,6 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
 
             try
             {
-
                 await SecureStorage.SetAsync("Username", "luiseduardohd");
                 await SecureStorage.SetAsync("Password", "Password1xyz");
             }

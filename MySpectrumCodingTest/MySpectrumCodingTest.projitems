@@ -25,8 +25,15 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\CreateUsernameViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Base\BaseViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Base\Entity.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Resources\Strings.designer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Base\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Strings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>
