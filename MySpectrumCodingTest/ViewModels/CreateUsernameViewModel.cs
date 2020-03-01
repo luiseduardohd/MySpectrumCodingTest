@@ -73,83 +73,89 @@ namespace MySpectrumCodingTest.ViewModels
             {
                 case "Email":
                     { 
-                        var email = Email;
                         EmailErrors.Clear();
-                        List<string> Errors = new List<string>();
-
-                        if ( email == String.Empty )
-                        {
-                            Errors.Add("Email cannot be empty");
-                        }
-
-                        if (! email.IsEmail() )
-                        {
-                            Errors.Add("Please use a valid email address format");
-                        }
-
-                        if (await isUsedEmail(email))
-                        {
-                            Errors.Add("This email is already in use");
-                        }
-
+                        var Errors = await GetEmailErrors(Email);
                         EmailErrors.AddRange<string>(Errors);
                         useEmailErrors?.Invoke(Errors);
                     }
                     break;
                 case "Password":
-                    if (usePasswordErrors != null)
                     {
                         PasswordErrors.Clear();
-                        List<string> Errors = new List<string>();
-
-
-                        if ( Password == String.Empty )
-                        {
-                            Errors.Add("Password cannot be empty");
-                        }
-
-                        Regex lettersAndNumericalDigitsOnlyRegex = new Regex(@"[a-zA-Z0-9]+");
-                        if (lettersAndNumericalDigitsOnlyRegex.IsMatch(Password))
-                        {
-                            Errors.Add("String must consist of a mixture of letters and numerical digits only");
-                        }
-                        Regex atLeastOneLetterRegex = new Regex(@".*[a-zA-Z].*");
-                        Regex atLeastOneNumberRegex = new Regex(@".*[0-9].*");
-                        if (atLeastOneLetterRegex.IsMatch(Password) && atLeastOneNumberRegex.IsMatch(Password))
-                        {
-                            Errors.Add("String must contains at least one letter and one numerical digit");
-                        }
-                        if (5 <= Password.Length && Password.Length <= 12)
-                        {
-
-                            Errors.Add("String must contains at least one letter and one numerical digit");
-                        }
-                        Regex patternRepeatedRegex = new Regex(@"(?<pattern>[a-zA-Z\d]+)\k<pattern>.*");
-                        if (patternRepeatedRegex.IsMatch(Password))
-                        {
-                            Errors.Add("String must consist of a mixture of letters and numerical digits only");
-                        }
+                        var Errors = getPasswordErrors(Password);
                         PasswordErrors.AddRange<string>(Errors);
                         usePasswordErrors?.Invoke(Errors);
                     }
                     break;
                 case "ConfirmPassword":
-                    if (useConfirmPasswordErrors != null)
                     {
                         ConfirmPasswordErrors.Clear();
-                        List<string> Errors = new List<string>();
-
-
-                        if ( Password != String.Empty && ConfirmPassword == String.Empty)
-                        {
-                            Errors.Add("Please confirm password");
-                        }
-
+                        var Errors = getConfirmPasswordErrors(Password,ConfirmPassword);
                         ConfirmPasswordErrors.AddRange<string>(Errors);
                         useConfirmPasswordErrors?.Invoke(Errors);
                     }
                     break;
             }
+        }
+        private async Task<List<string>> GetEmailErrors(string email)
+        {
+            List<string> Errors = new List<string>();
+            if (email == String.Empty)
+            {
+                Errors.Add("Email cannot be empty");
+            }
+
+            if (!email.IsEmail())
+            {
+                Errors.Add("Please use a valid email address format");
+            }
+
+            if ( await isUsedEmail(email) )
+            {
+                Errors.Add("This email is already in use");
+            }
+
+            return Errors;
+        }
+
+        private List<string> getPasswordErrors(string password)
+        {
+            List<string> Errors = new List<string>();
+            Regex lettersAndNumericalDigitsOnlyRegex = new Regex(@"[a-zA-Z0-9]+");
+            if (!lettersAndNumericalDigitsOnlyRegex.IsMatch(password))
+            {
+                Errors.Add("String must consist of a mixture of letters and numerical digits only");
+            }
+            Regex atLeastOneLetterRegex = new Regex(@".*[a-zA-Z].*");
+            Regex atLeastOneNumberRegex = new Regex(@".*[0-9].*");
+            if (!(atLeastOneLetterRegex.IsMatch(password) && atLeastOneNumberRegex.IsMatch(password)))
+            {
+                Errors.Add("String must contains at least one letter and one numerical digit");
+            }
+            if (!(5 <= password.Length && password.Length <= 12))
+            {
+                Errors.Add("String must be between 5 and 12 characters in length.");
+            }
+            Regex repeatedSecuenceRegex = new Regex(@"(?<secuence>[a-zA-Z\d]+)\k<secuence>.*");
+            if (repeatedSecuenceRegex.IsMatch(password))
+            {
+                Errors.Add("String must not contain any sequence of characters immediately followed by the same sequence");
+            }
+            return Errors;
+        }
+        private List<string> getConfirmPasswordErrors(string password,string confirmPassword)
+        {
+            List<string> Errors = new List<string>();
+            if ( password != String.Empty && confirmPassword == String.Empty )
+            {
+                Errors.Add("Please confirm password");
+            }
+
+            if ( password != confirmPassword )
+            {
+                Errors.Add("Password doesn't match");
+            }
+            return Errors;
         }
 
         private async Task<bool> isUsedEmail(string email)

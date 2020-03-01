@@ -567,9 +567,6 @@
                                                 <state key="normal" title="Save User">
                                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
-                                                <connections>
-                                                    <segue destination="49e-Tb-3d3" kind="presentation" identifier="CreateUsernameToUsers" modalPresentationStyle="fullScreen" id="UmP-kX-ZTR"/>
-                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -628,7 +625,4 @@
         <image name="Second" width="32" height="30"/>
         <image name="SpectrumLogo" width="225" height="168.75"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="UmP-kX-ZTR"/>
-    </inferredMetricsTieBreakers>
 </document>

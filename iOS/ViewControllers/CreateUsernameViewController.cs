@@ -30,6 +30,16 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
         {
             MainThread.BeginInvokeOnMainThread(() =>
             {
+                if(errors.Count>0)
+                {
+                    txtEmail.TextColor = UIColor.Red;
+                    txtEmail.Layer.BorderColor = UIColor.Red.CGColor;
+                }
+                else
+                {
+                    txtEmail.TextColor = UIColor.Black;
+                    txtEmail.Layer.BorderColor = UIColor.Green.CGColor;
+                }
                 lblEmailError.Text = errors.FirstOrDefault();
             });
         }
@@ -37,6 +47,16 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
         {
             MainThread.BeginInvokeOnMainThread(() =>
             {
+                if (errors.Count > 0)
+                {
+                    txtPassword.TextColor = UIColor.Red;
+                    txtPassword.Layer.BorderColor = UIColor.Red.CGColor;
+                }
+                else
+                {
+                    txtPassword.TextColor = UIColor.Black;
+                    txtPassword.Layer.BorderColor = UIColor.Green.CGColor;
+                }
                 lblPasswordError.Text = errors.FirstOrDefault();
             });
         }
@@ -44,6 +64,16 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
         {
             MainThread.BeginInvokeOnMainThread(() =>
             {
+                if (errors.Count > 0)
+                {
+                    txtConfirmPassword.TextColor = UIColor.Red;
+                    txtConfirmPassword.Layer.BorderColor = UIColor.Red.CGColor;
+                }
+                else
+                {
+                    txtConfirmPassword.TextColor = UIColor.Black;
+                    txtConfirmPassword.Layer.BorderColor = UIColor.Green.CGColor;
+                }
                 lblConfirmPasswordError.Text = errors.FirstOrDefault();
             });
         }
@@ -92,6 +122,10 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
                 }
 
             };
+            txtUsername.Layer.BorderWidth = 1.0f;
+            txtEmail.Layer.BorderWidth = 1.0f;
+            txtPassword.Layer.BorderWidth = 1.0f;
+            txtConfirmPassword.Layer.BorderWidth = 1.0f;
 
             txtUsername.AddTarget((s, e) => {
                 UITextField textField = s as UITextField;
