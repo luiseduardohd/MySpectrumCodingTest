@@ -7,12 +7,12 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using MySpectrumCodingTest.Extensions;
+using PropertyChanged;
 
 namespace MySpectrumCodingTest.ViewModels
 {
     public class CreateUsernameViewModel : BaseViewModel, INotifyPropertyChanged
     {
-        public User User { get; set; }
         public string Username { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
@@ -61,7 +61,7 @@ namespace MySpectrumCodingTest.ViewModels
                 };
                 await UsersDataStore.AddAsync(user);
                 userCreated?.Invoke(user);
-                Dialogs.Toast("Welcome "+user.FullName);
+                Dialogs.Toast("Welcome "+user.Username);
             }
             return;
         }

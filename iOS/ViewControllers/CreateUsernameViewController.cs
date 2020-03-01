@@ -50,7 +50,7 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
 
         private void completeAction(User user)
         {
-            this.PerformSegue("CreateUsernameToUsers", this);
+            //this.PerformSegue("CreateUsernameToUsers", this);
         }
 
 
