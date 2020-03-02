@@ -172,21 +172,6 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o38-4h-e1C">
-                                <rect key="frame" x="-4812" y="-4523" width="10000" height="10000"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal">
-                                    <attributedString key="attributedTitle">
-                                        <fragment content="Trouble">
-                                            <attributes>
-                                                <font key="NSFont" name="HelveticaNeue" family="Helvetica Neue" size="15"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
-                                </state>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y3D-bl-PRE">
                                 <rect key="frame" x="16" y="216" width="79" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -237,6 +222,20 @@
                                 <rect key="frame" x="69" y="726" width="240" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="10522" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES" hasAttributedTitle="YES">
+                                <rect key="frame" x="16" y="477" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Trouble Signing In ?">
+                                            <attributes>
+                                                <font key="NSFont" name="HelveticaNeue" family="Helvetica Neue" size="17"/>
+                                                <integer key="NSUnderline" value="1"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.023529411764705882" green="0.15294117647058825" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -244,10 +243,10 @@
                     <connections>
                         <outlet property="btnCreateUsername" destination="3070" id="name-outlet-3070"/>
                         <outlet property="btnSignIn" destination="bdi-tJ-Vjr" id="name-outlet-bdi-tJ-Vjr"/>
-                        <outlet property="btnTroubleSigningIn" destination="o38-4h-e1C" id="name-outlet-o38-4h-e1C"/>
                         <outlet property="txtPassword" destination="LNG-kq-pu2" id="name-outlet-LNG-kq-pu2"/>
                         <outlet property="txtUsername" destination="StH-LQ-6Ak" id="name-outlet-StH-LQ-6Ak"/>
                         <segue destination="49e-Tb-3d3" kind="presentation" identifier="LoginPerformed" modalPresentationStyle="fullScreen" id="8pa-GW-2sY"/>
+                        <outlet property="btnTroubleSigningIn" destination="10522" id="name-outlet-10522"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QRD-EV-JSp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
