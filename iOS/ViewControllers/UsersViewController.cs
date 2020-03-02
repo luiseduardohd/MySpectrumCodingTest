@@ -136,8 +136,8 @@ namespace MySpectrumCodingTest.iOS
             var cell = tableView.DequeueReusableCell(CELL_IDENTIFIER, indexPath);
 
             var item = viewModel.Users[indexPath.Row];
-            cell.TextLabel.Text = $"User name: {item.Username}";
-            cell.DetailTextLabel.Text = $"User details: {item.Description}";
+            cell.TextLabel.Text = $"{item.Username}";
+            cell.DetailTextLabel.Text = $"{item.Email}";
             cell.LayoutMargins = UIEdgeInsets.Zero;
 
             return cell;

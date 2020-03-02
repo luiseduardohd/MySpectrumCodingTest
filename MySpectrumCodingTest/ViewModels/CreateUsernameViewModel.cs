@@ -55,9 +55,11 @@ namespace MySpectrumCodingTest.ViewModels
         {
             if( isValidPassword(Password) && isValidEmail() )
             {
-                var user = new User() {
-                    Password = Password,
+                var user = new User()
+                {
+                    Username = Username,
                     Email = Email,
+                    Password = Password,
                 };
                 await UsersDataStore.AddAsync(user);
                 userCreated?.Invoke(user);
