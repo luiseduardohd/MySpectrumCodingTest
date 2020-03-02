@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using MySpectrumCodingTest.Extensions;
 using PropertyChanged;
+using Xamarin.Essentials;
 
 namespace MySpectrumCodingTest.ViewModels
 {
@@ -62,6 +63,15 @@ namespace MySpectrumCodingTest.ViewModels
                     Password = Password,
                 };
                 await UsersDataStore.AddAsync(user);
+                try
+                {
+                    await SecureStorage.SetAsync("Username", Username);
+                    await SecureStorage.SetAsync("Password", Password);
+                }
+                catch (Exception)
+                {
+                }
+
                 userCreated?.Invoke(user);
                 Dialogs.Toast("Welcome "+user.Username);
             }

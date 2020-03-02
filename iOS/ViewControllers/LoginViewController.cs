@@ -69,34 +69,14 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
 
         public async void linkEvents()
         {
-            try
-            {
-                await SecureStorage.SetAsync("Username", "luiseduardohd");
-                await SecureStorage.SetAsync("Password", "Password1xyz");
-            }
-            catch (Exception ex)
-            {
-
-            }
-            var Username = "";
-            var Password = "";
-            try
-            {
-                Username = await SecureStorage.GetAsync("Username");
-                Password = await SecureStorage.GetAsync("Password");
-            }
-            catch (Exception ex)
-            {
-                
-            }
-
-            txtUsername.Text = Username;
-            txtPassword.Text = Password;
+            await LoginViewModel.Initialize();
+            txtUsername.Text = LoginViewModel.Username;
+            txtPassword.Text = LoginViewModel.Password;
 
 
             txtUsername.AddTarget((s, e) => {
                 UITextField textField = s as UITextField;
-                LoginViewModel.Password = textField.Text;
+                LoginViewModel.Username = textField.Text;
             }, UIControlEvent.EditingChanged);
 
             txtPassword.AddTarget((s, e) => {
@@ -115,6 +95,7 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
                 //TODO: user can login with username, accounNumber and email.
 
                 //this.PerformSegue("LoginPerformed", sender as NSObject);
+                LoginViewModel.TroubleSigningInCommand.Execute(null);
             };
         }
 

@@ -89,18 +89,6 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
             base.ViewDidLoad();
 
             btnSaveUser.TouchUpInside += async (s, e) => {
-                try
-                {
-
-                    var Username = txtEmail.Text;
-                    var Password = txtPassword.Text;
-                    await SecureStorage.SetAsync("Username", Username);
-                    await SecureStorage.SetAsync("Password", Password);
-                }
-                catch (Exception ex)
-                {
-                    //TODO:add logger
-                }
                 //this.DismissModalViewController(true);
                 var password = txtPassword.Text;
                 var confirmPassword = txtPassword.Text;
