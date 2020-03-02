@@ -9,14 +9,14 @@ namespace MySpectrumCodingTest
     {
         public ObservableCollection<User> Users { get; set; }
         public Command LoadUsersCommand { get; set; }
-        public Command AddUserCommand { get; set; }
+        public Command SaveUserCommand { get; set; }
 
         public UsersViewModel()
         {
             Title = "Users";
             Users = new ObservableCollection<User>();
             LoadUsersCommand = new Command(async () => await ExecuteLoadUsersCommand());
-            AddUserCommand = new Command<User>(async (User user) => await AddUser(user));
+            SaveUserCommand = new Command<User>(async (User user) => await SaveUser(user));
         }
 
         async Task ExecuteLoadUsersCommand()
@@ -45,7 +45,7 @@ namespace MySpectrumCodingTest
             }
         }
 
-        async Task AddUser(User user)
+        async Task SaveUser(User user)
         {
             Users.Add(user);
             await UsersDataStore.AddAsync(user);

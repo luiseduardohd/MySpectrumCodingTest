@@ -5,14 +5,14 @@ using UIKit;
 
 namespace MySpectrumCodingTest.iOS
 {
-    public partial class UserNewViewController : UIViewController
+    public partial class UserViewController : UIViewController
     {
         public UsersViewModel ViewModel { get; set; }
 
-        public UserNewViewController(IntPtr handle) : base(handle)
+        public UserViewController(IntPtr handle) : base(handle)
         {
         }
-
+        /*
         private void validatePassword(string password)
         {
             var ErrorsList = getPasswordErrors(password);
@@ -52,24 +52,24 @@ namespace MySpectrumCodingTest.iOS
             }
             return Errors;
         }
-
+        */
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
 
-            txtPassword.AddTarget((s, e) => {
-                UITextField textField = s as UITextField;
-                validatePassword(textField.Text);
-            }, UIControlEvent.EditingChanged);
+            //txtPassword.AddTarget((s, e) => {
+            //    UITextField textField = s as UITextField;
+            //    validatePassword(textField.Text);
+            //}, UIControlEvent.EditingChanged);
 
             btnSaveItem.TouchUpInside += (sender, e) =>
             {
                 var user = new User
                 {
                     Username = txtTitle.Text,
-                    Description = txtDesc.Text
+                    Email = txtDesc.Text
                 };
-                ViewModel.AddUserCommand.Execute(user);
+                ViewModel.SaveUserCommand.Execute(user);
                 NavigationController.PopToRootViewController(true);
             };
         }

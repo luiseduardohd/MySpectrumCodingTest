@@ -11,8 +11,8 @@ using UIKit;
 
 namespace MySpectrumCodingTest.iOS
 {
-    [Register ("UserNewViewController")]
-    partial class UserNewViewController
+    [Register ("UserViewController")]
+    partial class UserViewController
     {
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]

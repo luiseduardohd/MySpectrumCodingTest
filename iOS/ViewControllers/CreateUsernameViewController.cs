@@ -90,6 +90,7 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
 
             btnSaveUser.TouchUpInside += async (s, e) => {
                 //this.DismissModalViewController(true);
+                /*
                 var password = txtPassword.Text;
                 var confirmPassword = txtPassword.Text;
                 if ( isPasswordValid(password) && passwordsMatch(password, confirmPassword) )
@@ -108,6 +109,8 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
                 {
                     displayAlert("Error", "Please correct the errors");
                 }
+                */
+                CreateUsernameViewModel.SaveUserCommand.Execute(null);
 
             };
             txtUsername.Layer.BorderWidth = 1.0f;
@@ -132,6 +135,7 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
                 CreateUsernameViewModel.ConfirmPassword = textField.Text;
             }, UIControlEvent.EditingChanged);
         }
+        /*
         private void displayAlert(string title, string message)
         {
 
@@ -166,7 +170,6 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
             {
                 txtPassword.TextColor = UIColor.Red;
                 lblPasswordError.Text = ErrorsList.First();
-                //lblPasswordError.Text = String.Join("" + Environment.NewLine, ErrorsList);
             }
             else
             {
@@ -200,6 +203,7 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
             }
             return Errors;
         }
+        */
 
         public override void DidReceiveMemoryWarning()
         {

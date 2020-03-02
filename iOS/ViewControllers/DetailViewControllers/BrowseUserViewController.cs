@@ -4,10 +4,10 @@ using UIKit;
 
 namespace MySpectrumCodingTest.iOS.ViewControllers.DetailViewControllers
 {
-    public partial class BrowseUserDetailViewController : UIViewController
+    public partial class BrowseUserViewController : UIViewController
     {
         public UserDetailViewModel ViewModel { get; set; }
-        public BrowseUserDetailViewController(IntPtr handle) : base(handle) { }
+        public BrowseUserViewController(IntPtr handle) : base(handle) { }
 
         public override void ViewDidLoad()
         {
@@ -15,7 +15,7 @@ namespace MySpectrumCodingTest.iOS.ViewControllers.DetailViewControllers
 
             Title = ViewModel.Title;
             ItemNameLabel.Text = ViewModel.User.Username;
-            ItemDescriptionLabel.Text = ViewModel.User.Description;
+            ItemDescriptionLabel.Text = ViewModel.User.Email;
         }
     }
 }

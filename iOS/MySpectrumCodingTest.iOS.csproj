@@ -145,17 +145,17 @@
     </Compile>
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Main.cs" />
-    <Compile Include="ViewControllers\UserNewViewController.cs" />
-    <Compile Include="ViewControllers\UserNewViewController.designer.cs">
-      <DependentUpon>UserNewViewController.cs</DependentUpon>
+    <Compile Include="ViewControllers\UserViewController.cs" />
+    <Compile Include="ViewControllers\UserViewController.designer.cs">
+      <DependentUpon>UserViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="ViewControllers\UsersViewController.cs" />
     <Compile Include="ViewControllers\UsersViewController.designer.cs">
       <DependentUpon>UsersViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="ViewControllers\DetailViewControllers\BrowseUserDetailViewController.cs" />
-    <Compile Include="ViewControllers\DetailViewControllers\BrowseUserDetailViewController.designer.cs">
-      <DependentUpon>BrowseUserDetailViewController.cs</DependentUpon>
+    <Compile Include="ViewControllers\DetailViewControllers\BrowseUserViewController.cs" />
+    <Compile Include="ViewControllers\DetailViewControllers\BrowseUserViewController.designer.cs">
+      <DependentUpon>BrowseUserViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="ViewControllers\LoginViewController.cs" />
     <Compile Include="ViewControllers\LoginViewController.designer.cs">

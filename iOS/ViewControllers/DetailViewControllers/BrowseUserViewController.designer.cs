@@ -11,8 +11,8 @@ using UIKit;
 
 namespace MySpectrumCodingTest.iOS.ViewControllers.DetailViewControllers
 {
-    [Register("BrowseUserDetailViewController")]
-    partial class BrowseUserDetailViewController
+    [Register("BrowseUserViewController")]
+    partial class BrowseUserViewController
     {
         [Outlet]
         [GeneratedCode("iOS Designer", "1.0")]

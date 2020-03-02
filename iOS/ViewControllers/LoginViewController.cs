@@ -43,7 +43,7 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
         }
         private void completeAction()
         {
-            this.PerformSegue("LoginPerformed", this);
+            //this.PerformSegue("LoginPerformed", this);
         }
 
         public override void ViewDidLoad()
@@ -87,7 +87,8 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
 
             btnSignIn.TouchUpInside += (object sender, EventArgs e) =>
             {
-                LoginViewModel.LoginCommand.Execute(null);
+                //LoginViewModel.LoginCommand.Execute(null);
+                this.PerformSegue("LoginPerformed", this);
             };
             btnTroubleSigningIn.TouchUpInside += (object sender, EventArgs e) =>
             {

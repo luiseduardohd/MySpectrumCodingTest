@@ -54,7 +54,7 @@ namespace MySpectrumCodingTest.iOS
         {
             if (segue.Identifier == "NavigateToItemDetailSegue")
             {
-                var controller = segue.DestinationViewController as BrowseUserDetailViewController;
+                var controller = segue.DestinationViewController as BrowseUserViewController;
                 var indexPath = TableView.IndexPathForCell(sender as UITableViewCell);
                 var item = ViewModel.Users[indexPath.Row];
 
@@ -62,7 +62,7 @@ namespace MySpectrumCodingTest.iOS
             }
             else if (segue.Identifier == "NavigateToNewItemSegue")
             {
-                var controller = segue.DestinationViewController as UserNewViewController;
+                var controller = segue.DestinationViewController as UserViewController;
                 controller.ViewModel = ViewModel;
             }
         }
