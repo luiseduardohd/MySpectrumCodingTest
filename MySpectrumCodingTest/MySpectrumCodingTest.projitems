@@ -16,13 +16,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\MockDataStore.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AboutViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)App.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\UserDetailViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\User.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\UsersViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\InitialViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SettingsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\LoginViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\CreateUsernameViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\UserViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Base\BaseViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Base\Entity.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Resources\Strings.designer.cs" />

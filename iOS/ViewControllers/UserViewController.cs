@@ -1,77 +1,129 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using UIKit;
+using Xamarin.Essentials;
+using System.Linq;
+using System.Text.RegularExpressions;
+using Foundation;
+using MySpectrumCodingTest.ViewModels;
 
-namespace MySpectrumCodingTest.iOS
+namespace MySpectrumCodingTest.iOS.ViewControllers
 {
-    public partial class UserViewController : UIViewController
+    public partial class UserViewController : BaseViewController
     {
-        public UsersViewModel ViewModel { get; set; }
+        public UserViewModel UserViewModel { get; set; }
 
         public UserViewController(IntPtr handle) : base(handle)
         {
+            Initialize();
         }
-        /*
-        private void validatePassword(string password)
+        public UserViewController() : base(nameof(UserViewController), null)
         {
-            var ErrorsList = getPasswordErrors(password);
-            if ( ErrorsList.Count > 0 )
-            {
-                txtPassword.TextColor = UIColor.Red;
-                lblErrors.Text = String.Join( "" + Environment.NewLine, ErrorsList );
-            }
-            else
-            {
-                txtPassword.TextColor = UIColor.Black;
-                lblErrors.Text = "";
-            }
+            Initialize();
         }
-        private List<string> getPasswordErrors(string password)
+        public void Initialize()
         {
-            List<string> Errors = new List<string>();
-            Regex lettersAndNumericalDigitsOnlyRegex = new Regex(@"[a-zA-Z0-9]+");
-            if ( ! lettersAndNumericalDigitsOnlyRegex.IsMatch(password) )
-            {
-                Errors.Add("String must consist of a mixture of letters and numerical digits only");
-            }
-            Regex atLeastOneLetterRegex = new Regex(@".*[a-zA-Z].*");
-            Regex atLeastOneNumberRegex = new Regex(@".*[0-9].*");
-            if ( ! ( atLeastOneLetterRegex.IsMatch(password) && atLeastOneNumberRegex.IsMatch(password) ) )
-            {
-                Errors.Add("String must contains at least one letter and one numerical digit");
-            }
-            if ( !(  5 <= password.Length && password.Length <= 12 ) )
-            {
-                Errors.Add("String must be between 5 and 12 characters in length.");
-            }
-            Regex repeatedSecuenceRegex = new Regex(@"(?<secuence>[a-zA-Z\d]+)\k<secuence>.*");
-            if ( repeatedSecuenceRegex.IsMatch(password) )
-            {
-                Errors.Add("String must not contain any sequence of characters immediately followed by the same sequence");
-            }
-            return Errors;
+            UserViewModel = new UserViewModel(this.CompleteAction, this.UseEmailErrors, this.UsePasswordErrors, this.UseConfirmPasswordErrors);
         }
-        */
+
+
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
 
-            //txtPassword.AddTarget((s, e) => {
-            //    UITextField textField = s as UITextField;
-            //    validatePassword(textField.Text);
-            //}, UIControlEvent.EditingChanged);
-
-            btnSaveItem.TouchUpInside += (sender, e) =>
+            btnSaveUser.TouchUpInside += (s, e) =>
             {
-                var user = new User
-                {
-                    Username = txtTitle.Text,
-                    Email = txtDesc.Text
-                };
-                ViewModel.SaveUserCommand.Execute(user);
-                NavigationController.PopToRootViewController(true);
+                UserViewModel.SaveUserCommand.Execute(null);
             };
+            txtUsername.Layer.BorderWidth = 1.0f;
+            txtEmail.Layer.BorderWidth = 1.0f;
+            txtPassword.Layer.BorderWidth = 1.0f;
+            txtConfirmPassword.Layer.BorderWidth = 1.0f;
+
+            txtUsername.Text = UserViewModel.Username;
+            txtEmail.Text = UserViewModel.Email;
+            txtPassword.Text = UserViewModel.Password;
+
+            txtUsername.AddTarget((s, e) => {
+                UITextField textField = s as UITextField;
+                UserViewModel.Username = textField.Text;
+            }, UIControlEvent.EditingChanged);
+            txtEmail.AddTarget((s, e) => {
+                UITextField textField = s as UITextField;
+                UserViewModel.Email = textField.Text;
+            }, UIControlEvent.EditingChanged);
+            txtPassword.AddTarget((s, e) => {
+                UITextField textField = s as UITextField;
+                UserViewModel.Password = textField.Text;
+            }, UIControlEvent.EditingChanged);
+            txtConfirmPassword.AddTarget((s, e) => {
+                UITextField textField = s as UITextField;
+                UserViewModel.ConfirmPassword = textField.Text;
+            }, UIControlEvent.EditingChanged);
+        }
+        public override void DidReceiveMemoryWarning()
+        {
+            base.DidReceiveMemoryWarning();
+        }
+
+
+
+        private void UseEmailErrors(List<string> errors)
+        {
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                if (errors.Count > 0)
+                {
+                    txtEmail.TextColor = UIColor.Red;
+                    txtEmail.Layer.BorderColor = UIColor.Red.CGColor;
+                }
+                else
+                {
+                    txtEmail.TextColor = UIColor.Black;
+                    txtEmail.Layer.BorderColor = UIColor.Green.CGColor;
+                }
+                lblEmailError.Text = errors.FirstOrDefault();
+            });
+        }
+        private void UsePasswordErrors(List<string> errors)
+        {
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                if (errors.Count > 0)
+                {
+                    txtPassword.TextColor = UIColor.Red;
+                    txtPassword.Layer.BorderColor = UIColor.Red.CGColor;
+                }
+                else
+                {
+                    txtPassword.TextColor = UIColor.Black;
+                    txtPassword.Layer.BorderColor = UIColor.Green.CGColor;
+                }
+                lblPasswordError.Text = errors.FirstOrDefault();
+            });
+        }
+        private void UseConfirmPasswordErrors(List<string> errors)
+        {
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                if (errors.Count > 0)
+                {
+                    txtConfirmPassword.TextColor = UIColor.Red;
+                    txtConfirmPassword.Layer.BorderColor = UIColor.Red.CGColor;
+                }
+                else
+                {
+                    txtConfirmPassword.TextColor = UIColor.Black;
+                    txtConfirmPassword.Layer.BorderColor = UIColor.Green.CGColor;
+                }
+                lblConfirmPasswordError.Text = errors.FirstOrDefault();
+            });
+        }
+
+        private void CompleteAction(User user)
+        {
+            this.PerformSegue("CreateUsernameToUsers", this);
         }
     }
 }
+

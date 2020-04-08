@@ -1,12 +1,12 @@
 ﻿using System;
-
+using MySpectrumCodingTest.ViewModels;
 using UIKit;
 
 namespace MySpectrumCodingTest.iOS.ViewControllers.DetailViewControllers
 {
     public partial class BrowseUserViewController : UIViewController
     {
-        public UserDetailViewModel ViewModel { get; set; }
+        public UserViewModel ViewModel { get; set; }
         public BrowseUserViewController(IntPtr handle) : base(handle) { }
 
         public override void ViewDidLoad()

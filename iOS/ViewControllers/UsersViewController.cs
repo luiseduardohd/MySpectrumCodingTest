@@ -1,5 +1,6 @@
 using Foundation;
-using MySpectrumCodingTest.iOS.ViewControllers.DetailViewControllers;
+using MySpectrumCodingTest.iOS.ViewControllers;
+using MySpectrumCodingTest.ViewModels;
 using System;
 using System.Collections.Specialized;
 using UIKit;
@@ -22,7 +23,6 @@ namespace MySpectrumCodingTest.iOS
 
             ViewModel = new UsersViewModel();
 
-            // Setup UITableView.
             refreshControl = new UIRefreshControl();
             refreshControl.ValueChanged += RefreshControl_ValueChanged;
             TableView.Add(refreshControl);
@@ -35,7 +35,6 @@ namespace MySpectrumCodingTest.iOS
 
             bbtnLogout.Clicked += (s, e) =>
             {
-                //this.DismissModalViewController(true);
                 NSObject sender = s as NSObject;
                 this.PerformSegue("UsersToLogin", s as NSObject);
             };
@@ -54,35 +53,19 @@ namespace MySpectrumCodingTest.iOS
         {
             if (segue.Identifier == "NavigateToItemDetailSegue")
             {
-                var controller = segue.DestinationViewController as BrowseUserViewController;
+                var controller = segue.DestinationViewController as UserViewController;
                 var indexPath = TableView.IndexPathForCell(sender as UITableViewCell);
-                var item = ViewModel.Users[indexPath.Row];
+                var user = ViewModel.Users[indexPath.Row];
 
-                controller.ViewModel = new UserDetailViewModel(item);
+                controller.UserViewModel = new UserViewModel(user);
             }
             else if (segue.Identifier == "NavigateToNewItemSegue")
             {
                 var controller = segue.DestinationViewController as UserViewController;
-                controller.ViewModel = ViewModel;
+                var user = new User();
+                controller.UserViewModel = new UserViewModel(user);
             }
         }
-        //public override void PrepareForSegue2(UIStoryboardSegue segue, NSObject sender)
-        //{
-        //    base.PrepareForSegue(segue, sender);
-
-        //    //Set up Destination View Controller
-        //    if (segue.Identifier == "loginSegue")
-        //    {
-        //        //var itvc = (IncidentTVC)segue.DestinationViewController;
-        //        //if (itvc != null)
-        //        //{
-        //        //    itvc.setUser(this, currentUser);
-
-        //        //}
-        //    }
-
-
-        //}
 
         void RefreshControl_ValueChanged(object sender, EventArgs e)
         {

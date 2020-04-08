@@ -7,6 +7,7 @@ using System.Linq;
 using Xamarin.Essentials;
 using Plugin.Share;
 using Plugin.Share.Abstractions;
+using System.Diagnostics;
 
 namespace MySpectrumCodingTest.ViewModels
 {
@@ -77,9 +78,9 @@ namespace MySpectrumCodingTest.ViewModels
                 Username = await SecureStorage.GetAsync("Username");
                 Password = await SecureStorage.GetAsync("Password");
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-
+                Debug.WriteLine("Exception:"+ exception.Message);
             }
             return;
         }

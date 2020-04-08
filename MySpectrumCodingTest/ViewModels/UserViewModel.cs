@@ -12,57 +12,53 @@ using Xamarin.Essentials;
 
 namespace MySpectrumCodingTest.ViewModels
 {
-    public class CreateUsernameViewModel : BaseViewModel, INotifyPropertyChanged
+    public class UserViewModel : BaseViewModel, INotifyPropertyChanged
     {
         public string Username { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
         public string ConfirmPassword { get; set; }
 
-
         public Command SaveUserCommand { get; private set; }
 
-
-        //public string Password =>
-        
         public ObservableCollection<string> EmailErrors { get; set; } = new ObservableCollection<string>();
         public ObservableCollection<string> PasswordErrors { get; set; } = new ObservableCollection<string>();
         public ObservableCollection<string> ConfirmPasswordErrors { get; set; } = new ObservableCollection<string>();
+        public User User { get;  set; }
 
-        private Action<User> userCreated;
+        private Action<User> userSaved;
         private Action<List<string>> useEmailErrors;
         private Action<List<string>> usePasswordErrors;
         private Action<List<string>> useConfirmPasswordErrors;
+        
 
-
-        //public CreateUsernameViewModel(User user = null, Action<List<string>> passwordErrors = null)
-        public CreateUsernameViewModel(Action<User> userCreated, Action<List<string>> useEmailErrors = null,Action < List<string>> usePasswordErrors = null, Action<List<string>> useConfirmPasswordErrors = null)
+        public UserViewModel(Action<User> userSaved, Action<List<string>> useEmailErrors = null, Action<List<string>> usePasswordErrors = null, Action<List<string>> useConfirmPasswordErrors = null)
         {
-            //if (user != null)
-            //{
-            //    Title = user.Username;
-            //    User = user;
-            //}
-            this.userCreated = userCreated;
+            this.userSaved = userSaved;
             this.useEmailErrors = useEmailErrors;
             this.usePasswordErrors = usePasswordErrors;
             this.useConfirmPasswordErrors = useConfirmPasswordErrors;
-            SaveUserCommand = new Command( () =>   SaveUser());
+            SaveUserCommand = new Command(() => SaveUser());
             this.PropertyChanged += async (object sender, PropertyChangedEventArgs e)
-                => await UserDetailViewModel_PropertyChangedAsync( sender, e);
+                => await UserDetailViewModel_PropertyChangedAsync(sender, e);
+        }
+
+        public UserViewModel(User user)
+        {
+            this.User = user;
+            this.Username = user.Username;
+            this.Email = user.Email;
+            this.Password = user.Password;
+            this.ConfirmPassword = user.Password;
+            SaveUserCommand = new Command(() => SaveUser());
+            this.PropertyChanged += async (object sender, PropertyChangedEventArgs e)
+                => await UserDetailViewModel_PropertyChangedAsync(sender, e);
         }
 
         private async void SaveUser()
         {
-            if( isValidPassword(Password) && isValidEmail() )
+            if( IsValidPassword(Password) && IsValidEmail() )
             {
-                var user = new User()
-                {
-                    Username = Username,
-                    Email = Email,
-                    Password = Password,
-                };
-                await UsersDataStore.AddAsync(user);
                 try
                 {
                     await SecureStorage.SetAsync("Username", Username);
@@ -72,8 +68,33 @@ namespace MySpectrumCodingTest.ViewModels
                 {
                 }
 
-                userCreated?.Invoke(user);
-                Dialogs.Toast("Welcome "+user.Username);
+                var users = await UsersDataStore.GetAllAsync();
+                User user = null;
+                if( this.User ==null )
+                {
+                    var nextId = users.Max(x => x.Id) + 1;
+                    user = new User()
+                    {
+                        Id = nextId,
+                        Username = Username,
+                        Email = Email,
+                        Password = Password,
+                    };
+                    await UsersDataStore.AddAsync(user);
+
+                    await Task.Delay(2000);
+                    Dialogs.Toast("Welcome " + user.Username);
+                }
+                else
+                {
+                    user = this.User;
+                    await UsersDataStore.UpdateAsync(user);
+
+                    await Task.Delay(1000);
+                    Dialogs.Toast("Saved " + user.Username);
+                }
+                userSaved?.Invoke(user);
+
             }
             return;
         }
@@ -185,12 +206,12 @@ namespace MySpectrumCodingTest.ViewModels
             }
         }
 
-        private bool isValidEmail()
+        private bool IsValidEmail()
         {
             return EmailErrors.Count == 0;
         }
 
-        private bool isValidPassword(string password)
+        private bool IsValidPassword(string password)
         {
             return PasswordErrors.Count == 0;
         }
