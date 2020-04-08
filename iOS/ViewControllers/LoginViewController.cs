@@ -41,10 +41,6 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
         {
             LoginViewModel = new LoginViewModel(completeAction);
         }
-        private void completeAction()
-        {
-            //this.PerformSegue("LoginPerformed", this);
-        }
 
         public override void ViewDidLoad()
         {
@@ -53,7 +49,7 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
 #if MVVMCROSS
             CreateBindings();
 #else
-            linkEvents();
+            LinkEvents();
 #endif
         }
 #if MVVMCROSS
@@ -67,7 +63,7 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
         }
 #endif
 
-        public async void linkEvents()
+        public async void LinkEvents()
         {
             await LoginViewModel.Initialize();
             txtUsername.Text = LoginViewModel.Username;
@@ -87,8 +83,8 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
 
             btnSignIn.TouchUpInside += (object sender, EventArgs e) =>
             {
-                //LoginViewModel.LoginCommand.Execute(null);
-                this.PerformSegue("LoginPerformed", this);
+                LoginViewModel.LoginCommand.Execute(null);
+                //this.PerformSegue("LoginPerformed", this);
             };
             btnTroubleSigningIn.TouchUpInside += (object sender, EventArgs e) =>
             {
@@ -104,6 +100,12 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
         public override void DidReceiveMemoryWarning()
         {
             base.DidReceiveMemoryWarning();
+        }
+
+
+        private void completeAction()
+        {
+            this.PerformSegue("LoginPerformed", this);
         }
     }
 }

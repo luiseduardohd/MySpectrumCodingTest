@@ -70,14 +70,6 @@ namespace MySpectrumCodingTest.ViewModels
 
             if (isValidPassword && isValidEmail )
             {
-                try
-                {
-                    await SecureStorage.SetAsync("Username", Username);
-                    await SecureStorage.SetAsync("Password", Password);
-                }
-                catch (Exception)
-                {
-                }
 
                 var users = await UsersDataStore.GetAllAsync();
                 User user = null;
@@ -157,7 +149,7 @@ namespace MySpectrumCodingTest.ViewModels
                 Errors.Add("Please use a valid email address format");
             }
 
-            if ( await IsUsedEmail(email) )
+            if ( this.User == null && await IsUsedEmail(email) )
             {
                 Errors.Add("This email is already in use");
             }

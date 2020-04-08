@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using Acr.UserDialogs;
 using System.Linq;
-using Xamarin.Essentials;
 using Plugin.Share;
 using Plugin.Share.Abstractions;
 using System.Diagnostics;
@@ -27,7 +26,6 @@ namespace MySpectrumCodingTest.ViewModels
 
         #region Private
         public object completeAction { get; set; }
-        private Task Initialization { get;  set; }
         #endregion
 
 
@@ -36,7 +34,7 @@ namespace MySpectrumCodingTest.ViewModels
         {
 
             LoginCommand = new Command(async (o)=> {
-                bool success = await isValidLogin();
+                bool success = await IsValidLogin();
                 if ( ! success )
                 {
                     using (this.Dialogs.Loading("Loading"))
@@ -47,15 +45,6 @@ namespace MySpectrumCodingTest.ViewModels
                     return;
                 }
 
-                try
-                {
-                    await SecureStorage.SetAsync("Username", Username);
-                    await SecureStorage.SetAsync("Password", Password);
-                }
-                catch (Exception)
-                {
-                }
-
                 using (this.Dialogs.Loading("Loading"))
                 {
                     await Task.Delay(2000);
@@ -64,27 +53,9 @@ namespace MySpectrumCodingTest.ViewModels
                 completeAction?.Invoke();
             });
             TroubleSigningInCommand = new Command(() => CrossShare.Current.OpenBrowser("https://id.spectrum.net/recover",new BrowserOptions() {SafariControlTintColor = new ShareColor(255,255,255), SafariBarTintColor = new ShareColor(62, 146, 241), UseSafariWebViewController=true}));
-            Initialization = InitializeAsync();
+            
         }
-        private async Task InitializeAsync()
-        {
-            await getCredentials();
-            return ;
-        }
-        private async Task getCredentials()
-        {
-            try
-            {
-                Username = await SecureStorage.GetAsync("Username");
-                Password = await SecureStorage.GetAsync("Password");
-            }
-            catch (Exception exception)
-            {
-                Debug.WriteLine("Exception:"+ exception.Message);
-            }
-            return;
-        }
-        private async Task<bool> isValidLogin()
+        private async Task<bool> IsValidLogin()
         {
             bool success = false;
             var users = await UsersDataStore.GetAllAsync(true);

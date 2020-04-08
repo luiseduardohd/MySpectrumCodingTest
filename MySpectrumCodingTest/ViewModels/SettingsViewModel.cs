@@ -5,8 +5,8 @@ namespace MySpectrumCodingTest.ViewModels
 {
     public class SettingsViewModel : BaseViewModel
     {
-        private ICommand _cancelCommand;
-        private ICommand _logoutCommand;
+        //private ICommand _cancelCommand;
+        //private ICommand _logoutCommand;
 
         public SettingsViewModel()
         {
