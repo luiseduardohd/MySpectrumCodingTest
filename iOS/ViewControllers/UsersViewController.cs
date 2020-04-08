@@ -15,6 +15,7 @@ namespace MySpectrumCodingTest.iOS
 
         public UsersViewController(IntPtr handle) : base(handle)
         {
+            ViewModel = new UsersViewModel();
         }
 
         public override void ViewDidLoad()
@@ -27,6 +28,12 @@ namespace MySpectrumCodingTest.iOS
             refreshControl.ValueChanged += RefreshControl_ValueChanged;
             TableView.Add(refreshControl);
             TableView.Source = new ItemsDataSource(ViewModel);
+
+            bbtnAddUser.TouchUpInside += (s, e) =>
+            {
+                NSObject sender = s as NSObject;
+                this.PerformSegue("NavigateToNewItemSegue", s as NSObject);
+            };
 
             Title = ViewModel.Title;
 
@@ -45,8 +52,9 @@ namespace MySpectrumCodingTest.iOS
         {
             base.ViewDidAppear(animated);
 
-            if (ViewModel.Users.Count == 0)
+            //if (ViewModel.Users.Count == 0)
                 ViewModel.LoadUsersCommand.Execute(null);
+            TableView.ReloadData();
         }
 
         public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)
@@ -58,12 +66,14 @@ namespace MySpectrumCodingTest.iOS
                 var user = ViewModel.Users[indexPath.Row];
 
                 controller.UserViewModel = new UserViewModel(user);
+                controller.Initialize();
             }
             else if (segue.Identifier == "NavigateToNewItemSegue")
             {
                 var controller = segue.DestinationViewController as UserViewController;
-                var user = new User();
-                controller.UserViewModel = new UserViewModel(user);
+                //var user = new User();
+                //controller.UserViewModel = new UserViewModel(user);
+                //controller.Initialize();
             }
         }
 

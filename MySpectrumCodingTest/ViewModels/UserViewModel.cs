@@ -14,10 +14,10 @@ namespace MySpectrumCodingTest.ViewModels
 {
     public class UserViewModel : BaseViewModel, INotifyPropertyChanged
     {
-        public string Username { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public string ConfirmPassword { get; set; }
+        public string Username { get; set; } = "";
+        public string Email { get; set; } = "";
+        public string Password { get; set; } = "";
+        public string ConfirmPassword { get; set; } = "";
 
         public Command SaveUserCommand { get; private set; }
 
@@ -32,32 +32,43 @@ namespace MySpectrumCodingTest.ViewModels
         private Action<List<string>> useConfirmPasswordErrors;
         
 
-        public UserViewModel(Action<User> userSaved, Action<List<string>> useEmailErrors = null, Action<List<string>> usePasswordErrors = null, Action<List<string>> useConfirmPasswordErrors = null)
+
+        public UserViewModel()
         {
-            this.userSaved = userSaved;
-            this.useEmailErrors = useEmailErrors;
-            this.usePasswordErrors = usePasswordErrors;
-            this.useConfirmPasswordErrors = useConfirmPasswordErrors;
             SaveUserCommand = new Command(() => SaveUser());
             this.PropertyChanged += async (object sender, PropertyChangedEventArgs e)
                 => await UserDetailViewModel_PropertyChangedAsync(sender, e);
         }
 
-        public UserViewModel(User user)
+        public UserViewModel(User user):this()
         {
             this.User = user;
             this.Username = user.Username;
             this.Email = user.Email;
             this.Password = user.Password;
             this.ConfirmPassword = user.Password;
-            SaveUserCommand = new Command(() => SaveUser());
-            this.PropertyChanged += async (object sender, PropertyChangedEventArgs e)
-                => await UserDetailViewModel_PropertyChangedAsync(sender, e);
+        }
+
+        public UserViewModel(Action<User> userSaved, Action<List<string>> useEmailErrors = null, Action<List<string>> usePasswordErrors = null, Action<List<string>> useConfirmPasswordErrors = null)
+        {
+            Initialize(userSaved, useEmailErrors, usePasswordErrors, useConfirmPasswordErrors);
+        }
+        public void Initialize(Action<User> userSaved, Action<List<string>> useEmailErrors = null, Action<List<string>> usePasswordErrors = null, Action<List<string>> useConfirmPasswordErrors = null)
+        {
+            this.userSaved = userSaved;
+            this.useEmailErrors = useEmailErrors;
+            this.usePasswordErrors = usePasswordErrors;
+            this.useConfirmPasswordErrors = useConfirmPasswordErrors;
         }
 
         private async void SaveUser()
         {
-            if( IsValidPassword(Password) && IsValidEmail() )
+            //var isValidPassword = IsValidPassword(Password);
+            var isValidPassword = IsValidPassword();
+            //var IsValidEmail = IsValidEmail(Email);
+            var isValidEmail = IsValidEmail();
+
+            if (isValidPassword && isValidEmail )
             {
                 try
                 {
@@ -88,6 +99,9 @@ namespace MySpectrumCodingTest.ViewModels
                 else
                 {
                     user = this.User;
+                    user.Username = Username;
+                    user.Email = Email;
+                    user.Password = Password;
                     await UsersDataStore.UpdateAsync(user);
 
                     await Task.Delay(1000);
@@ -115,7 +129,7 @@ namespace MySpectrumCodingTest.ViewModels
                 case "Password":
                     {
                         PasswordErrors.Clear();
-                        var Errors = getPasswordErrors(Password);
+                        var Errors = GetPasswordErrors(Password);
                         PasswordErrors.AddRange<string>(Errors);
                         usePasswordErrors?.Invoke(Errors);
                     }
@@ -123,7 +137,7 @@ namespace MySpectrumCodingTest.ViewModels
                 case "ConfirmPassword":
                     {
                         ConfirmPasswordErrors.Clear();
-                        var Errors = getConfirmPasswordErrors(Password,ConfirmPassword);
+                        var Errors = GetConfirmPasswordErrors(Password,ConfirmPassword);
                         ConfirmPasswordErrors.AddRange<string>(Errors);
                         useConfirmPasswordErrors?.Invoke(Errors);
                     }
@@ -143,7 +157,7 @@ namespace MySpectrumCodingTest.ViewModels
                 Errors.Add("Please use a valid email address format");
             }
 
-            if ( await isUsedEmail(email) )
+            if ( await IsUsedEmail(email) )
             {
                 Errors.Add("This email is already in use");
             }
@@ -151,7 +165,7 @@ namespace MySpectrumCodingTest.ViewModels
             return Errors;
         }
 
-        private List<string> getPasswordErrors(string password)
+        private List<string> GetPasswordErrors(string password)
         {
             List<string> Errors = new List<string>();
             Regex lettersAndNumericalDigitsOnlyRegex = new Regex(@"[a-zA-Z0-9]+");
@@ -176,7 +190,7 @@ namespace MySpectrumCodingTest.ViewModels
             }
             return Errors;
         }
-        private List<string> getConfirmPasswordErrors(string password,string confirmPassword)
+        private List<string> GetConfirmPasswordErrors(string password,string confirmPassword)
         {
             List<string> Errors = new List<string>();
             if ( password != String.Empty && confirmPassword == String.Empty )
@@ -191,7 +205,7 @@ namespace MySpectrumCodingTest.ViewModels
             return Errors;
         }
 
-        private async Task<bool> isUsedEmail(string email)
+        private async Task<bool> IsUsedEmail(string email)
         {
             var users =  await UsersDataStore.GetAllAsync();
             var user = users.FirstOrDefault(x => x.Email == email);
@@ -211,7 +225,7 @@ namespace MySpectrumCodingTest.ViewModels
             return EmailErrors.Count == 0;
         }
 
-        private bool IsValidPassword(string password)
+        private bool IsValidPassword()
         {
             return PasswordErrors.Count == 0;
         }

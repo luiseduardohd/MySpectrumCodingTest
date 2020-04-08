@@ -15,15 +15,17 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
 
         public UserViewController(IntPtr handle) : base(handle)
         {
+            UserViewModel = new UserViewModel();
             Initialize();
         }
         public UserViewController() : base(nameof(UserViewController), null)
         {
+            UserViewModel = new UserViewModel();
             Initialize();
         }
         public void Initialize()
         {
-            UserViewModel = new UserViewModel(this.CompleteAction, this.UseEmailErrors, this.UsePasswordErrors, this.UseConfirmPasswordErrors);
+            UserViewModel.Initialize(this.CompleteAction, this.UseEmailErrors, this.UsePasswordErrors, this.UseConfirmPasswordErrors);
         }
 
 
@@ -66,6 +68,17 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
             base.DidReceiveMemoryWarning();
         }
 
+
+        public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)
+        {
+            if (segue.Identifier == "CreateUsernameToUsers")
+            {
+                var tabBarController = segue.DestinationViewController as UITabBarController;
+                var navigationController = tabBarController.ChildViewControllers[0] as UINavigationController;
+                var controller = navigationController.ChildViewControllers[0] as UsersViewController;
+                controller.ViewModel.LoadUsersCommand?.Execute(null);
+            }
+        }
 
 
         private void UseEmailErrors(List<string> errors)

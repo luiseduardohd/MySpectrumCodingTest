@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="jpR-mJ-npz">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="jpR-mJ-npz">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="SpectrumLogo" translatesAutoresizingMaskIntoConstraints="NO" id="1623">
-                                <rect key="frame" x="0.0" y="68" width="414" height="120"/>
+                                <rect key="frame" x="0.0" y="86" width="414" height="120"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="120" id="1624"/>
@@ -40,7 +40,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1638">
-                                <rect key="frame" x="20" y="303" width="374" height="201"/>
+                                <rect key="frame" x="20" y="321" width="374" height="201"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="201" id="1747"/>
@@ -114,7 +114,7 @@
                     <tabBarItem key="tabBarItem" title="First" image="First" id="acW-dT-cKf"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="U58-7W-wiN">
-                        <rect key="frame" x="0.0" y="20" width="414" height="50"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="barTintColor" red="0.11372549019607843" green="0.50196078431372548" blue="0.93725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -253,7 +253,7 @@
                     <tabBarItem key="tabBarItem" title="About" image="Second" id="cPa-gy-q4n"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="dDs-el-YGI">
-                        <rect key="frame" x="0.0" y="20" width="414" height="50"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="barTintColor" red="0.11372549019607843" green="0.50196078431372548" blue="0.93725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -281,7 +281,7 @@
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ITEM_CELL" textLabel="2166" detailTextLabel="zaj-Ft-XJX" rowHeight="110" style="IBUITableViewCellStyleSubtitle" id="79">
-                                <rect key="frame" x="0.0" y="22" width="414" height="110"/>
+                                <rect key="frame" x="0.0" y="28" width="414" height="110"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="79" id="80">
                                     <rect key="frame" x="0.0" y="0.0" width="383" height="110"/>
@@ -321,7 +321,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" id="2253">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2252">
-                                <rect key="frame" x="0.0" y="0.0" width="86" height="30"/>
+                                <rect key="frame" x="308" y="7" width="86" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Add User">
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -474,11 +474,11 @@
                         <viewControllerLayoutGuide type="bottom" id="Su6-3k-8e2"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="4306">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4315">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4316">
@@ -593,7 +593,7 @@
                                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="10861" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="10861">
                                                 <rect key="frame" x="119" y="471" width="159" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" title="Delete User"/>
@@ -601,7 +601,7 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4312" image="SpectrumLogo">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="SpectrumLogo" translatesAutoresizingMaskIntoConstraints="NO" id="4312">
                                         <rect key="frame" x="121" y="88" width="172" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
@@ -613,6 +613,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="MySpectrum" id="Tap-7a-Hev"/>
                     <connections>
+                        <outlet property="btnDeleteUser" destination="10861" id="name-outlet-10861"/>
                         <outlet property="btnSaveUser" destination="5437" id="name-outlet-5437"/>
                         <outlet property="lblConfirmPassword" destination="5433" id="name-outlet-5433"/>
                         <outlet property="lblConfirmPasswordError" destination="5668" id="name-outlet-5668"/>
@@ -627,7 +628,6 @@
                         <outlet property="txtPassword" destination="5436" id="name-outlet-5436"/>
                         <outlet property="txtUsername" destination="5432" id="name-outlet-5432"/>
                         <segue destination="49e-Tb-3d3" kind="presentation" identifier="CreateUsernameToUsers" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="1ID-Rr-NeN"/>
-                        <outlet property="btnDeleteUser" destination="10861" id="name-outlet-10861"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4307" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -639,7 +639,7 @@
             <objects>
                 <navigationController title="MySpectrum" automaticallyAdjustsScrollViewInsets="NO" id="jpR-mJ-npz" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="G8f-vA-Q6e">
-                        <rect key="frame" x="0.0" y="20" width="414" height="50"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="barTintColor" red="0.1137254902" green="0.50196078430000002" blue="0.93725490199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -656,14 +656,14 @@
             <point key="canvasLocation" x="-2228" y="64"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="First" width="32" height="30"/>
-        <image name="LoginBackground" width="132.6667" height="185"/>
-        <image name="Second" width="32" height="30"/>
-        <image name="SpectrumLogo" width="84.75" height="17.70159"/>
-    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Wc6-4R-Au4"/>
         <segue reference="1ID-Rr-NeN"/>
     </inferredMetricsTieBreakers>
+    <resources>
+        <image name="First" width="32" height="30"/>
+        <image name="LoginBackground" width="132.66670227050781" height="185"/>
+        <image name="Second" width="32" height="30"/>
+        <image name="SpectrumLogo" width="84.75" height="17.701589584350586"/>
+    </resources>
 </document>
