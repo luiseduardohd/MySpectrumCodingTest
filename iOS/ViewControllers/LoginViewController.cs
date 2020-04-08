@@ -74,11 +74,22 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
                 UITextField textField = s as UITextField;
                 LoginViewModel.Username = textField.Text;
             }, UIControlEvent.EditingChanged);
+            txtUsername.ShouldReturn = delegate
+             {
+                 txtUsername.ResignFirstResponder();
+                 return true;
+             };
 
             txtPassword.AddTarget((s, e) => {
                 UITextField textField = s as UITextField;
                 LoginViewModel.Password =  textField.Text;
             }, UIControlEvent.EditingChanged);
+            txtPassword.ShouldReturn = delegate
+            {
+                txtUsername.ResignFirstResponder();
+                LoginViewModel.LoginCommand.Execute(null);
+                return true;
+            };
 
 
             btnSignIn.TouchUpInside += (object sender, EventArgs e) =>
@@ -94,6 +105,9 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
                 //this.PerformSegue("LoginPerformed", sender as NSObject);
                 LoginViewModel.TroubleSigningInCommand.Execute(null);
             };
+            var g = new UITapGestureRecognizer(() => View.EndEditing(true));
+            g.CancelsTouchesInView = false;
+            View.AddGestureRecognizer(g);
         }
 
 

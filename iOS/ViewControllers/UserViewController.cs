@@ -50,23 +50,103 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
                 UITextField textField = s as UITextField;
                 UserViewModel.Username = textField.Text;
             }, UIControlEvent.EditingChanged);
+            //txtUsername.ShouldReturn = delegate{
+            //    txtUsername.ResignFirstResponder();
+            //    return true;
+            //};
             txtEmail.AddTarget((s, e) => {
                 UITextField textField = s as UITextField;
                 UserViewModel.Email = textField.Text;
             }, UIControlEvent.EditingChanged);
+            //txtEmail.ShouldReturn = delegate {
+            //    txtEmail.ResignFirstResponder();
+            //    return true;
+            //};
             txtPassword.AddTarget((s, e) => {
                 UITextField textField = s as UITextField;
                 UserViewModel.Password = textField.Text;
             }, UIControlEvent.EditingChanged);
+            //txtPassword.ShouldReturn = delegate {
+            //    txtUsername.ResignFirstResponder();
+            //    return true;
+            //};
             txtConfirmPassword.AddTarget((s, e) => {
                 UITextField textField = s as UITextField;
                 UserViewModel.ConfirmPassword = textField.Text;
             }, UIControlEvent.EditingChanged);
+            txtConfirmPassword.ShouldReturn = delegate {
+                txtConfirmPassword.ResignFirstResponder();
+                return true;
+            };
+            var g = new UITapGestureRecognizer(() => View.EndEditing(true));
+            g.CancelsTouchesInView = false;
+            View.AddGestureRecognizer(g);
+            //RegisterForKeyboardNotifications();
         }
         public override void DidReceiveMemoryWarning()
         {
             base.DidReceiveMemoryWarning();
         }
+
+        protected override void OnKeyboardChanged(bool visible, nfloat height)
+        {
+            //We "center" the popup when the keyboard appears/disappears
+            var frame = View.Frame;
+
+            if (visible)
+                frame.Y -= height / 2f;
+            else
+                frame.Y += height / 2f;
+            View.Frame = frame;
+        }
+        //protected virtual void RegisterForKeyboardNotifications()
+        //{
+        //    NSNotificationCenter.DefaultCenter.AddObserver(UIKeyboard.WillHideNotification, OnKeyboardNotification);
+        //    NSNotificationCenter.DefaultCenter.AddObserver(UIKeyboard.WillShowNotification, OnKeyboardNotification);
+        //}
+        //protected virtual UIView KeyboardGetActiveView()
+        //{
+        //    return View.FindFirstResponder();
+        //}
+        //protected virtual void OnKeyboardChanged(bool visible, float keyboardHeight)
+        //{
+        //    var activeView = ViewToCenterOnKeyboardShown ?? KeyboardGetActiveView();
+        //    if (activeView == null)
+        //        return;
+
+        //    var scrollView = activeView.FindSuperviewOfType(View, typeof(UIScrollView)) as UIScrollView;
+        //    if (scrollView == null)
+        //        return;
+
+        //    if (!visible)
+        //        RestoreScrollPosition(scrollView);
+        //    else
+        //        CenterViewInScroll(activeView, scrollView, keyboardHeight);
+        //}
+        //private void OnKeyboardNotification(NSNotification notification)
+        //{
+        //    if (!IsViewLoaded) return;
+
+        //    //Check if the keyboard is becoming visible
+        //    var visible = notification.Name == UIKeyboard.WillShowNotification;
+
+        //    //Start an animation, using values from the keyboard
+        //    UIView.BeginAnimations("AnimateForKeyboard");
+        //    UIView.SetAnimationBeginsFromCurrentState(true);
+        //    UIView.SetAnimationDuration(UIKeyboard.AnimationDurationFromNotification(notification));
+        //    UIView.SetAnimationCurve((UIViewAnimationCurve)UIKeyboard.AnimationCurveFromNotification(notification));
+
+        //    //Pass the notification, calculating keyboard height, etc.
+        //    bool landscape = InterfaceOrientation == UIInterfaceOrientation.LandscapeLeft || InterfaceOrientation == UIInterfaceOrientation.LandscapeRight;
+        //    var keyboardFrame = visible
+        //                            ? UIKeyboard.FrameEndFromNotification(notification)
+        //                            : UIKeyboard.FrameBeginFromNotification(notification);
+
+        //    OnKeyboardChanged(visible, landscape ? keyboardFrame.Width : keyboardFrame.Height);
+
+        //    //Commit the animation
+        //    UIView.CommitAnimations();
+        //}
 
 
         public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)
