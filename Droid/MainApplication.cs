@@ -21,7 +21,7 @@ namespace MySpectrumCodingTest.Droid
         {
             base.OnCreate();
             RegisterActivityLifecycleCallbacks(this);
-            App.Initt(();
+            App.Init();
         }
 
         public override void OnTerminate()

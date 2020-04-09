@@ -64,6 +64,10 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIScrollView ScrollView { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UITextField txtConfirmPassword { get; set; }
 
         [Outlet]
@@ -146,6 +150,11 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
             if (lblUserNameError != null) {
                 lblUserNameError.Dispose ();
                 lblUserNameError = null;
+            }
+
+            if (ScrollView != null) {
+                ScrollView.Dispose ();
+                ScrollView = null;
             }
 
             if (txtConfirmPassword != null) {

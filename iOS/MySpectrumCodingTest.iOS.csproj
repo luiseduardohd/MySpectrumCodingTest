@@ -165,6 +165,7 @@
     <Compile Include="Security\SecurityConstants.cs" />
     <Compile Include="Base\BaseViewController.cs" />
     <Compile Include="MvvmCross\Setup.cs" />
+    <Compile Include="Extensions\ViewExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Entitlements.plist" />
@@ -180,6 +181,7 @@
     <Folder Include="Security\" />
     <Folder Include="Base\" />
     <Folder Include="MvvmCross\" />
+    <Folder Include="Extensions\" />
   </ItemGroup>
   <Import Project="..\MySpectrumCodingTest\MySpectrumCodingTest.projitems" Label="Shared" Condition="Exists('..\MySpectrumCodingTest\MySpectrumCodingTest.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

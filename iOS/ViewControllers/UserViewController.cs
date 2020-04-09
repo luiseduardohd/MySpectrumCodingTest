@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Foundation;
 using MySpectrumCodingTest.ViewModels;
+using CoreGraphics;
+using MySpectrumCodingTest.iOS.Extensions;
 
 namespace MySpectrumCodingTest.iOS.ViewControllers
 {
@@ -50,7 +52,9 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
                 UITextField textField = s as UITextField;
                 UserViewModel.Username = textField.Text;
             }, UIControlEvent.EditingChanged);
-            //txtUsername.ShouldReturn = delegate{
+            txtUsername.ShouldReturn = TextFieldShouldReturn;
+            //txtUsername.ShouldReturn = delegate
+            //{
             //    txtUsername.ResignFirstResponder();
             //    return true;
             //};
@@ -58,7 +62,9 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
                 UITextField textField = s as UITextField;
                 UserViewModel.Email = textField.Text;
             }, UIControlEvent.EditingChanged);
-            //txtEmail.ShouldReturn = delegate {
+            txtEmail.ShouldReturn = TextFieldShouldReturn;
+            //txtEmail.ShouldReturn = delegate
+            //{
             //    txtEmail.ResignFirstResponder();
             //    return true;
             //};
@@ -66,8 +72,10 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
                 UITextField textField = s as UITextField;
                 UserViewModel.Password = textField.Text;
             }, UIControlEvent.EditingChanged);
-            //txtPassword.ShouldReturn = delegate {
-            //    txtUsername.ResignFirstResponder();
+            txtPassword.ShouldReturn = TextFieldShouldReturn;
+            //txtPassword.ShouldReturn = delegate
+            //{
+            //    txtPassword.ResignFirstResponder();
             //    return true;
             //};
             txtConfirmPassword.AddTarget((s, e) => {
@@ -78,27 +86,97 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
                 txtConfirmPassword.ResignFirstResponder();
                 return true;
             };
-            var g = new UITapGestureRecognizer(() => View.EndEditing(true));
+            var g = new UITapGestureRecognizer(() => {
+                var frame = ScrollView.Frame;
+                frame.Y = 0;
+                View.EndEditing(true);
+                });
             g.CancelsTouchesInView = false;
             View.AddGestureRecognizer(g);
             //RegisterForKeyboardNotifications();
+        }
+        private bool TextFieldShouldReturn(UITextField textField)
+        {
+            var nextTag = textField.Tag + 1;
+            UIResponder nextResponder = this.View.ViewWithTag(nextTag);
+            if (nextResponder != null)
+            {
+                nextResponder.BecomeFirstResponder();
+            }
+            else
+            {
+                textField.ResignFirstResponder();
+            }
+            return false; 
         }
         public override void DidReceiveMemoryWarning()
         {
             base.DidReceiveMemoryWarning();
         }
+        //protected override void OnKeyboardChanged(bool visible, nfloat keyboardHeight)
+        //{
+        //    var activeView = this.View.FindFirstResponder();
+        //    var scrollView = activeView?.FindSuperviewOfType(this.View, typeof(UIScrollView)) as UIScrollView;
 
-        protected override void OnKeyboardChanged(bool visible, nfloat height)
-        {
-            //We "center" the popup when the keyboard appears/disappears
-            var frame = View.Frame;
+        //    if (scrollView == null)
+        //        return;
 
-            if (visible)
-                frame.Y -= height / 2f;
-            else
-                frame.Y += height / 2f;
-            View.Frame = frame;
-        }
+        //    if (!visible)
+        //    {
+        //        RestoreScrollPosition(scrollView);
+        //    }
+        //    else
+        //    {
+        //        CenterViewInScroll(activeView, scrollView, keyboardHeight);
+        //    }
+                
+        //}
+        //protected virtual void CenterViewInScroll(UIView viewToCenter, UIScrollView scrollView, nfloat keyboardHeight)
+        //{
+        //    var contentInsets = new UIEdgeInsets(0.0f, 0.0f, keyboardHeight, 0.0f);
+        //    scrollView.ContentInset = contentInsets;
+        //    scrollView.ScrollIndicatorInsets = contentInsets;
+
+        //    // Position of the active field relative isnside the scroll view
+        //    var relativeFrame = viewToCenter.Superview.ConvertRectToView(viewToCenter.Frame, scrollView);
+
+        //    var landscape = this.InterfaceOrientation == UIInterfaceOrientation.LandscapeLeft
+        //        || this.InterfaceOrientation == UIInterfaceOrientation.LandscapeRight;
+
+        //    var spaceAboveKeyboard = (landscape ? scrollView.Frame.Width : scrollView.Frame.Height) - keyboardHeight;
+
+        //    // Move the active field to the center of the available space
+        //    var offset = relativeFrame.Y - (spaceAboveKeyboard - viewToCenter.Frame.Height) / 2;
+        //    scrollView.ContentOffset = new CGPoint(0, offset);
+        //}
+
+        //protected virtual void RestoreScrollPosition(UIScrollView scrollView)
+        //{
+        //    scrollView.ContentInset = UIEdgeInsets.Zero;
+        //    scrollView.ScrollIndicatorInsets = UIEdgeInsets.Zero;
+        //}
+
+        //protected override void OnKeyboardChanged(bool visible, nfloat height)
+        //{
+        //    //We "center" the popup when the keyboard appears/disappears
+        //    var frame = ScrollView.Frame;
+        //    var size = ScrollView.ContentSize;
+
+        //    if (visible)
+        //    {
+        //        size.Height -= height / 2f;
+        //        var currentHeight = ScrollView.ContentOffset.Y;
+        //        ScrollView.ContentOffset = new CGPoint(0, currentHeight - height / 2f);
+        //    }
+        //    else
+        //    {
+        //        size.Height += height / 2f;
+        //        var currentHeight = ScrollView.ContentOffset.Y;
+        //        ScrollView.ContentOffset = new CGPoint(0, currentHeight + height / 2f);
+        //    }
+
+        //    ScrollView.ContentSize = size;
+        //}
         //protected virtual void RegisterForKeyboardNotifications()
         //{
         //    NSNotificationCenter.DefaultCenter.AddObserver(UIKeyboard.WillHideNotification, OnKeyboardNotification);
