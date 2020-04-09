@@ -24,7 +24,7 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
         }
         public void Initialize()
         {
-            UserViewModel.Initialize(this.CompleteAction, this.UseEmailErrors, this.UsePasswordErrors, this.UseConfirmPasswordErrors);
+            UserViewModel.Initialize(this.CompleteAction, this.DeleteAction, this.UseEmailErrors, this.UsePasswordErrors, this.UseConfirmPasswordErrors);
         }
 
 
@@ -139,6 +139,10 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
         }
 
         private void CompleteAction(User user)
+        {
+            this.PerformSegue("CreateUsernameToUsers", this);
+        }
+        private void DeleteAction()
         {
             this.PerformSegue("CreateUsernameToUsers", this);
         }

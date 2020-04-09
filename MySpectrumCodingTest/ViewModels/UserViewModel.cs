@@ -27,6 +27,7 @@ namespace MySpectrumCodingTest.ViewModels
         public bool IsDeleteEnabled => User != null;
 
         private Action<User> userSaved;
+        private Action      userDeleted;
         private Action<List<string>> useEmailErrors;
         private Action<List<string>> usePasswordErrors;
         private Action<List<string>> useConfirmPasswordErrors;
@@ -36,8 +37,6 @@ namespace MySpectrumCodingTest.ViewModels
         public UserViewModel()
         {
             SaveUserCommand = new Command(() => SaveUser());
-            this.PropertyChanged += async (object sender, PropertyChangedEventArgs e)
-                => await UserDetailViewModel_PropertyChangedAsync(sender, e);
             DeleteUserCommand = new Command(() => DeleteUser());
             this.PropertyChanged += async (object sender, PropertyChangedEventArgs e)
                 => await UserDetailViewModel_PropertyChangedAsync(sender, e);
@@ -52,13 +51,14 @@ namespace MySpectrumCodingTest.ViewModels
             this.ConfirmPassword = user.Password;
         }
 
-        public UserViewModel(Action<User> userSaved, Action<List<string>> useEmailErrors = null, Action<List<string>> usePasswordErrors = null, Action<List<string>> useConfirmPasswordErrors = null)
+        public UserViewModel(Action<User> userSaved,Action userDeleted, Action<List<string>> useEmailErrors = null, Action<List<string>> usePasswordErrors = null, Action<List<string>> useConfirmPasswordErrors = null)
         {
-            Initialize(userSaved, useEmailErrors, usePasswordErrors, useConfirmPasswordErrors);
+            Initialize(userSaved, userDeleted, useEmailErrors, usePasswordErrors, useConfirmPasswordErrors);
         }
-        public void Initialize(Action<User> userSaved, Action<List<string>> useEmailErrors = null, Action<List<string>> usePasswordErrors = null, Action<List<string>> useConfirmPasswordErrors = null)
+        public void Initialize(Action<User> userSaved, Action userDeleted, Action<List<string>> useEmailErrors = null, Action<List<string>> usePasswordErrors = null, Action<List<string>> useConfirmPasswordErrors = null)
         {
             this.userSaved = userSaved;
+            this.userDeleted = userDeleted;
             this.useEmailErrors = useEmailErrors;
             this.usePasswordErrors = usePasswordErrors;
             this.useConfirmPasswordErrors = useConfirmPasswordErrors;
@@ -83,7 +83,7 @@ namespace MySpectrumCodingTest.ViewModels
                     userSaved?.Invoke(user);
 
                     await Task.Delay(2000);
-                    Dialogs.Toast("Welcome " + user.Username);
+                    Dialogs.Toast("User created: " + user.Username);
                 }
                 else
                 {
@@ -107,6 +107,7 @@ namespace MySpectrumCodingTest.ViewModels
             {
                 var userName = this.User.Username;
                 await UsersDataStore.DeleteAsync(this.User);
+                userDeleted?.Invoke();
 
                 await Task.Delay(2000);
                 Dialogs.Toast("Deleted user: " + userName);

@@ -65,7 +65,7 @@ namespace MySpectrumCodingTest.Services
         {
             await InitializeAsync();
             User _user = await Database.Table<User>().Where((User arg) => arg.Id == user.Id).FirstOrDefaultAsync();
-            var result = await Database.DeleteAsync<User>(_user);
+            var result = await Database.DeleteAsync<User>(_user.Id);
             return true;
         }
 
