@@ -52,7 +52,7 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
         {
             bool visible = notification.Name == UIKeyboard.WillShowNotification;
 
-            UIView.BeginAnimations("AnimateForKeyboard");
+            UIView.BeginAnimations("Keyboard");
             UIView.SetAnimationBeginsFromCurrentState(true);
             UIView.SetAnimationDuration(UIKeyboard.AnimationDurationFromNotification(notification));
             UIView.SetAnimationCurve((UIViewAnimationCurve)UIKeyboard.AnimationCurveFromNotification(notification));
