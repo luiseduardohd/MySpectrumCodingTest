@@ -22,6 +22,20 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
             base.ViewDidLoad();
             RegisterForKeyboardNotifications();
         }
+        protected bool TextFieldShouldReturn(UITextField textField)
+        {
+            var nextTag = textField.Tag + 1;
+            UIResponder nextResponder = this.View.ViewWithTag(nextTag);
+            if (nextResponder != null)
+            {
+                nextResponder.BecomeFirstResponder();
+            }
+            else
+            {
+                textField.ResignFirstResponder();
+            }
+            return false;
+        }
 
         protected virtual void RegisterForKeyboardNotifications()
         {
@@ -35,10 +49,10 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
             bool visible = notification.Name == UIKeyboard.WillShowNotification;
 
             //Start an animation, using values from the keyboard
-            //UIView.BeginAnimations("AnimateForKeyboard");
-            //UIView.SetAnimationBeginsFromCurrentState(true);
-            //UIView.SetAnimationDuration(UIKeyboard.AnimationDurationFromNotification(notification));
-            //UIView.SetAnimationCurve((UIViewAnimationCurve)UIKeyboard.AnimationCurveFromNotification(notification));
+            UIView.BeginAnimations("AnimateForKeyboard");
+            UIView.SetAnimationBeginsFromCurrentState(true);
+            UIView.SetAnimationDuration(UIKeyboard.AnimationDurationFromNotification(notification));
+            UIView.SetAnimationCurve((UIViewAnimationCurve)UIKeyboard.AnimationCurveFromNotification(notification));
 
             //Pass the notification, calculating keyboard height, etc.
             bool landscape = InterfaceOrientation == UIInterfaceOrientation.LandscapeLeft || InterfaceOrientation == UIInterfaceOrientation.LandscapeRight;
@@ -54,7 +68,7 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
             }
 
             //Commit the animation
-            //UIView.CommitAnimations();
+            UIView.CommitAnimations();
         }
         protected virtual void OnKeyboardChanged(bool visible, nfloat keyboardHeight)
         {
