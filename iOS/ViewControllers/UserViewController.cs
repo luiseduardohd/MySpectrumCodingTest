@@ -69,17 +69,11 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
 
             btnSaveUser.TouchUpInside += async (s, e) =>
             {
-                //btnSaveUser.Enabled = false;
                 UserViewModel.SaveUserCommand.Execute(null);
-                //await Task.Delay(2000);
-                //btnSaveUser.Enabled = true;
             };
             btnDeleteUser.TouchUpInside += async (s, e) =>
             {
-                //btnDeleteUser.Enabled = false;
                 UserViewModel.DeleteUserCommand.Execute(null);
-                //await Task.Delay(2000);
-                //btnDeleteUser.Enabled = true;
             };
 
         }

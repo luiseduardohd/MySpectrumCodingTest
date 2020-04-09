@@ -5,6 +5,8 @@ namespace MySpectrumCodingTest
 {
     public interface IDataStore<T>
     {
+        Task InitializeAsync();
+
         Task<bool> AddAsync(T item);
         Task<bool> UpdateAsync(T item);
         Task<bool> DeleteAsync(int id);

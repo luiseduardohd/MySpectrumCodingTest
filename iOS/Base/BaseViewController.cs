@@ -19,9 +19,6 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            //var g = new UITapGestureRecognizer(() => View.EndEditing(true));
-            //g.CancelsTouchesInView = false;
-            //View.AddGestureRecognizer(g);
             RegisterForKeyboardNotifications();
         }
         protected void TapToHideKeyboard(UIView View)
@@ -29,7 +26,6 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
             var g = new UITapGestureRecognizer(() => View.EndEditing(true));
             g.CancelsTouchesInView = false;
             View.AddGestureRecognizer(g);
-
         }
         protected bool TextFieldShouldReturn(UITextField textField)
         {

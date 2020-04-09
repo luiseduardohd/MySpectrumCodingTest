@@ -22,6 +22,10 @@ namespace MySpectrumCodingTest
                 users.Add(user);
             }
         }
+        public Task InitializeAsync()
+        {
+            return new Task(()=> { });
+        }
 
         public async Task<bool> AddAsync(User user)
         {

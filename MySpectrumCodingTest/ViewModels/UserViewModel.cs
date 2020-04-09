@@ -5,10 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using MySpectrumCodingTest.Extensions;
-using PropertyChanged;
-using Xamarin.Essentials;
 
 namespace MySpectrumCodingTest.ViewModels
 {
@@ -69,9 +66,7 @@ namespace MySpectrumCodingTest.ViewModels
 
         private async void SaveUser()
         {
-            //var isValidPassword = IsValidPassword(Password);
             var isValidPassword = IsValidPassword();
-            //var IsValidEmail = IsValidEmail(Email);
             var isValidEmail = IsValidEmail();
 
             if (isValidPassword && isValidEmail )
