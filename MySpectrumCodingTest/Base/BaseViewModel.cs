@@ -4,12 +4,11 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Acr.UserDialogs;
-using MvvmCross.ViewModels;
 using MySpectrumCodingTest.Resources;
 
 namespace MySpectrumCodingTest
 {
-    public abstract class BaseViewModel : MvxViewModel
+    public abstract class BaseViewModel :INotifyPropertyChanged 
     {
         public IDataStore<User> UsersDataStore => ServiceLocator.Instance.Get<IDataStore<User>>() ?? new UsersInMemoryDataStore();
 
@@ -21,36 +20,19 @@ namespace MySpectrumCodingTest
         public bool IsBusy
         {
             get { return isBusy; }
-            set { SetProperty(ref isBusy, value); }
+            set { OnPropertyChanged(nameof(IsBusy));}
         }
-        //public bool IsBusy { get; set; } = false;
 
         string title = string.Empty;
+
         public string Title
         {
             get { return title; }
-            set { SetProperty(ref title, value); }
+            set { OnPropertyChanged(nameof(IsBusy)); }
         }
-        //public string Title { get; set; } = string.Empty;
-        /*
-        MvxNotifyTask IMvxViewModel.InitializeTask { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        protected bool SetProperty<T>(ref T backingStore, T value,
-            [CallerMemberName]string propertyName = "",
-            Action onChanged = null)
-        {
-            if (EqualityComparer<T>.Default.Equals(backingStore, value))
-                return false;
-
-            backingStore = value;
-            onChanged?.Invoke();
-            OnPropertyChanged(propertyName);
-            return true;
-        }
-        */
         #region INotifyPropertyChanged
-        /*
-        public override event PropertyChangedEventHandler PropertyChanged;
+        
+        public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
             var changed = PropertyChanged;
@@ -59,23 +41,9 @@ namespace MySpectrumCodingTest
 
             changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        */
+        
         #endregion
 
-
-        /// <summary>
-        /// Gets the internationalized string at the given <paramref name="index"/>, which is the key of the resource.
-        /// </summary>
-        /// <param name="index">Index key of the string from the resources of internationalized strings.</param>
-        public string this[string index] => Strings.ResourceManager.GetString(index);
-    }
-    public abstract class BaseViewModel<TParameter, TResult> : MvxViewModel<TParameter, TResult>
-        where TParameter : class
-        where TResult : class
-    {
-        protected BaseViewModel()
-        {
-        }
 
         /// <summary>
         /// Gets the internationalized string at the given <paramref name="index"/>, which is the key of the resource.

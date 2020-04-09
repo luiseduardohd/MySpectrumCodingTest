@@ -20,11 +20,14 @@ namespace MySpectrumCodingTest.ViewModels
         public string ConfirmPassword { get; set; } = "";
 
         public Command SaveUserCommand { get; private set; }
+        public Command DeleteUserCommand { get; private set; }
 
         public ObservableCollection<string> EmailErrors { get; set; } = new ObservableCollection<string>();
         public ObservableCollection<string> PasswordErrors { get; set; } = new ObservableCollection<string>();
         public ObservableCollection<string> ConfirmPasswordErrors { get; set; } = new ObservableCollection<string>();
         public User User { get;  set; }
+
+        public bool IsDeleteEnabled => User != null;
 
         private Action<User> userSaved;
         private Action<List<string>> useEmailErrors;
@@ -36,6 +39,9 @@ namespace MySpectrumCodingTest.ViewModels
         public UserViewModel()
         {
             SaveUserCommand = new Command(() => SaveUser());
+            this.PropertyChanged += async (object sender, PropertyChangedEventArgs e)
+                => await UserDetailViewModel_PropertyChangedAsync(sender, e);
+            DeleteUserCommand = new Command(() => DeleteUser());
             this.PropertyChanged += async (object sender, PropertyChangedEventArgs e)
                 => await UserDetailViewModel_PropertyChangedAsync(sender, e);
         }
@@ -69,38 +75,46 @@ namespace MySpectrumCodingTest.ViewModels
             var isValidEmail = IsValidEmail();
 
             if (isValidPassword && isValidEmail )
-            {
-
-                var users = await UsersDataStore.GetAllAsync();
-                User user = null;
+            {                
                 if( this.User ==null )
                 {
-                    var nextId = users.Max(x => x.Id) + 1;
-                    user = new User()
+                    var user = new User()
                     {
-                        Id = nextId,
                         Username = Username,
                         Email = Email,
                         Password = Password,
                     };
                     await UsersDataStore.AddAsync(user);
+                    userSaved?.Invoke(user);
 
                     await Task.Delay(2000);
                     Dialogs.Toast("Welcome " + user.Username);
                 }
                 else
                 {
-                    user = this.User;
+                    var user = this.User;
                     user.Username = Username;
                     user.Email = Email;
                     user.Password = Password;
                     await UsersDataStore.UpdateAsync(user);
+                    userSaved?.Invoke(user);
 
                     await Task.Delay(1000);
                     Dialogs.Toast("Saved " + user.Username);
                 }
-                userSaved?.Invoke(user);
 
+            }
+            return;
+        }
+        private async void DeleteUser()
+        {
+            if (this.User != null)
+            {
+                var userName = this.User.Username;
+                await UsersDataStore.DeleteAsync(this.User);
+
+                await Task.Delay(2000);
+                Dialogs.Toast("Deleted user: " + userName);
             }
             return;
         }

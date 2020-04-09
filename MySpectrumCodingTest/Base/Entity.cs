@@ -1,8 +1,12 @@
 ﻿using System;
+using SQLite;
+
 namespace MySpectrumCodingTest.Models
 {
     public class Entity
     {
-        public string Id { get; set; }
+        [PrimaryKey]
+        [AutoIncrement]
+        public int Id { get; set; }
     }
 }

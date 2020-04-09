@@ -7,8 +7,9 @@ namespace MySpectrumCodingTest
     {
         Task<bool> AddAsync(T item);
         Task<bool> UpdateAsync(T item);
-        Task<bool> DeleteAsync(string id);
-        Task<T> GetAsync(string id);
+        Task<bool> DeleteAsync(int id);
+        Task<bool> DeleteAsync(T item);
+        Task<T> GetAsync(int id);
         Task<IEnumerable<T>> GetAllAsync(bool forceRefresh = false);
     }
 }

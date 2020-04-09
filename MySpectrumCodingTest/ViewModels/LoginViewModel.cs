@@ -64,8 +64,6 @@ namespace MySpectrumCodingTest.ViewModels
                 x.Username == Username
                 ||
                 x.Email == Username
-                //||
-                //x.AccountNumber == Username 
             )
             && x.Password == Password);
 

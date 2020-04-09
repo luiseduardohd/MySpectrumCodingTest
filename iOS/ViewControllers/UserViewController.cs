@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using UIKit;
-using Xamarin.Essentials;
 using System.Linq;
 using Foundation;
 using MySpectrumCodingTest.ViewModels;
+using System.Threading.Tasks;
 
 namespace MySpectrumCodingTest.iOS.ViewControllers
 {
@@ -32,10 +32,6 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
         {
             base.ViewDidLoad();
 
-            btnSaveUser.TouchUpInside += (s, e) =>
-            {
-                UserViewModel.SaveUserCommand.Execute(null);
-            };
             txtUsername.Layer.BorderWidth = 1.0f;
             txtEmail.Layer.BorderWidth = 1.0f;
             txtPassword.Layer.BorderWidth = 1.0f;
@@ -45,33 +41,47 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
             txtEmail.Text = UserViewModel.Email;
             txtPassword.Text = UserViewModel.Password;
 
+            btnDeleteUser.Hidden = ! UserViewModel.IsDeleteEnabled;
+
             txtUsername.AddTarget((s, e) => {
                 UITextField textField = s as UITextField;
                 UserViewModel.Username = textField.Text;
             }, UIControlEvent.EditingChanged);
             txtUsername.ShouldReturn = TextFieldShouldReturn;
+
             txtEmail.AddTarget((s, e) => {
                 UITextField textField = s as UITextField;
                 UserViewModel.Email = textField.Text;
             }, UIControlEvent.EditingChanged);
             txtEmail.ShouldReturn = TextFieldShouldReturn;
+
             txtPassword.AddTarget((s, e) => {
                 UITextField textField = s as UITextField;
                 UserViewModel.Password = textField.Text;
             }, UIControlEvent.EditingChanged);
             txtPassword.ShouldReturn = TextFieldShouldReturn;
+
             txtConfirmPassword.AddTarget((s, e) => {
                 UITextField textField = s as UITextField;
                 UserViewModel.ConfirmPassword = textField.Text;
             }, UIControlEvent.EditingChanged);
             txtConfirmPassword.ShouldReturn = TextFieldShouldReturn;
-            var g = new UITapGestureRecognizer(() => {
-                var frame = ScrollView.Frame;
-                frame.Y = 0;
-                View.EndEditing(true);
-                });
-            g.CancelsTouchesInView = false;
-            View.AddGestureRecognizer(g);
+
+            btnSaveUser.TouchUpInside += async (s, e) =>
+            {
+                //btnSaveUser.Enabled = false;
+                UserViewModel.SaveUserCommand.Execute(null);
+                //await Task.Delay(2000);
+                //btnSaveUser.Enabled = true;
+            };
+            btnDeleteUser.TouchUpInside += async (s, e) =>
+            {
+                //btnDeleteUser.Enabled = false;
+                UserViewModel.DeleteUserCommand.Execute(null);
+                //await Task.Delay(2000);
+                //btnDeleteUser.Enabled = true;
+            };
+
         }
         public override void DidReceiveMemoryWarning()
         {
@@ -93,54 +103,45 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
 
         private void UseEmailErrors(List<string> errors)
         {
-            MainThread.BeginInvokeOnMainThread(() =>
+            if (errors.Count > 0)
             {
-                if (errors.Count > 0)
-                {
-                    txtEmail.TextColor = UIColor.Red;
-                    txtEmail.Layer.BorderColor = UIColor.Red.CGColor;
-                }
-                else
-                {
-                    txtEmail.TextColor = UIColor.Black;
-                    txtEmail.Layer.BorderColor = UIColor.Green.CGColor;
-                }
-                lblEmailError.Text = errors.FirstOrDefault();
-            });
+                txtEmail.TextColor = UIColor.Red;
+                txtEmail.Layer.BorderColor = UIColor.Red.CGColor;
+            }
+            else
+            {
+                txtEmail.TextColor = UIColor.Black;
+                txtEmail.Layer.BorderColor = UIColor.Green.CGColor;
+            }
+            lblEmailError.Text = errors.FirstOrDefault();
         }
         private void UsePasswordErrors(List<string> errors)
         {
-            MainThread.BeginInvokeOnMainThread(() =>
+            if (errors.Count > 0)
             {
-                if (errors.Count > 0)
-                {
-                    txtPassword.TextColor = UIColor.Red;
-                    txtPassword.Layer.BorderColor = UIColor.Red.CGColor;
-                }
-                else
-                {
-                    txtPassword.TextColor = UIColor.Black;
-                    txtPassword.Layer.BorderColor = UIColor.Green.CGColor;
-                }
-                lblPasswordError.Text = errors.FirstOrDefault();
-            });
+                txtPassword.TextColor = UIColor.Red;
+                txtPassword.Layer.BorderColor = UIColor.Red.CGColor;
+            }
+            else
+            {
+                txtPassword.TextColor = UIColor.Black;
+                txtPassword.Layer.BorderColor = UIColor.Green.CGColor;
+            }
+            lblPasswordError.Text = errors.FirstOrDefault();
         }
         private void UseConfirmPasswordErrors(List<string> errors)
         {
-            MainThread.BeginInvokeOnMainThread(() =>
+            if (errors.Count > 0)
             {
-                if (errors.Count > 0)
-                {
-                    txtConfirmPassword.TextColor = UIColor.Red;
-                    txtConfirmPassword.Layer.BorderColor = UIColor.Red.CGColor;
-                }
-                else
-                {
-                    txtConfirmPassword.TextColor = UIColor.Black;
-                    txtConfirmPassword.Layer.BorderColor = UIColor.Green.CGColor;
-                }
-                lblConfirmPasswordError.Text = errors.FirstOrDefault();
-            });
+                txtConfirmPassword.TextColor = UIColor.Red;
+                txtConfirmPassword.Layer.BorderColor = UIColor.Red.CGColor;
+            }
+            else
+            {
+                txtConfirmPassword.TextColor = UIColor.Black;
+                txtConfirmPassword.Layer.BorderColor = UIColor.Green.CGColor;
+            }
+            lblConfirmPasswordError.Text = errors.FirstOrDefault();
         }
 
         private void CompleteAction(User user)

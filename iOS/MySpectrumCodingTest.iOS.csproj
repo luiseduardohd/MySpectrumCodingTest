@@ -101,9 +101,6 @@
     </Reference>
     <Reference Include="OpenTK-1.0" />
     <Reference Include="System.Drawing.Common.dll" />
-    <Reference Include="MvvmCross">
-      <HintPath>..\packages\MvvmCross.6.4.2\lib\xamarinios10\MvvmCross.dll</HintPath>
-    </Reference>
     <Reference Include="BTProgressHUD">
       <HintPath>..\packages\BTProgressHUD.1.2.0.6\lib\Xamarin.iOS10\BTProgressHUD.dll</HintPath>
     </Reference>
@@ -112,6 +109,30 @@
     </Reference>
     <Reference Include="PropertyChanged">
       <HintPath>..\packages\PropertyChanged.Fody.3.2.6\lib\netstandard1.0\PropertyChanged.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Buffers">
+      <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory">
+      <HintPath>..\packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.core">
+      <HintPath>..\packages\SQLitePCLRaw.core.1.1.13\lib\Xamarin.iOS10\SQLitePCLRaw.core.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.provider.sqlite3">
+      <HintPath>..\packages\SQLitePCLRaw.provider.sqlite3.ios_unified.1.1.13\lib\Xamarin.iOS10\SQLitePCLRaw.provider.sqlite3.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.batteries_green">
+      <HintPath>..\packages\SQLitePCLRaw.bundle_green.1.1.13\lib\Xamarin.iOS10\SQLitePCLRaw.batteries_green.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.batteries_v2">
+      <HintPath>..\packages\SQLitePCLRaw.bundle_green.1.1.13\lib\Xamarin.iOS10\SQLitePCLRaw.batteries_v2.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLite-net">
+      <HintPath>..\packages\sqlite-net-pcl.1.6.292\lib\netstandard1.1\SQLite-net.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -161,10 +182,7 @@
     <Compile Include="ViewControllers\UserViewController.designer.cs">
       <DependentUpon>UserViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="Security\KeyChainHelper.cs" />
-    <Compile Include="Security\SecurityConstants.cs" />
     <Compile Include="Base\BaseViewController.cs" />
-    <Compile Include="MvvmCross\Setup.cs" />
     <Compile Include="Extensions\ViewExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -178,9 +196,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets.xcassets\SpectrumLogo.imageset\" />
-    <Folder Include="Security\" />
     <Folder Include="Base\" />
-    <Folder Include="MvvmCross\" />
     <Folder Include="Extensions\" />
   </ItemGroup>
   <Import Project="..\MySpectrumCodingTest\MySpectrumCodingTest.projitems" Label="Shared" Condition="Exists('..\MySpectrumCodingTest\MySpectrumCodingTest.projitems')" />

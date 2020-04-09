@@ -6,9 +6,9 @@ namespace MySpectrumCodingTest.ViewModels
     {
         public InitialViewModel()
         {
-            //Modules = new ObservableCollection<ModuleItemViewModel>();
+            
         }
 
-        //public ObservableCollection<ModuleItemViewModel> Modules { get; private set; }
+        
     }
 }

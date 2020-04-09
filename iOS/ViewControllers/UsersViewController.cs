@@ -52,8 +52,7 @@ namespace MySpectrumCodingTest.iOS
         {
             base.ViewDidAppear(animated);
 
-            //if (ViewModel.Users.Count == 0)
-                ViewModel.LoadUsersCommand.Execute(null);
+            ViewModel.LoadUsersCommand.Execute(null);
             TableView.ReloadData();
         }
 
@@ -67,13 +66,6 @@ namespace MySpectrumCodingTest.iOS
 
                 controller.UserViewModel = new UserViewModel(user);
                 controller.Initialize();
-            }
-            else if (segue.Identifier == "NavigateToNewItemSegue")
-            {
-                var controller = segue.DestinationViewController as UserViewController;
-                //var user = new User();
-                //controller.UserViewModel = new UserViewModel(user);
-                //controller.Initialize();
             }
         }
 

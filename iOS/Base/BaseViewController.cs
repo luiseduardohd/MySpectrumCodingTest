@@ -1,8 +1,7 @@
 ﻿using System;
 using CoreGraphics;
 using Foundation;
-using MvvmCross.Platforms.Ios.Views;
-using MvvmCross.ViewModels;
+using MySpectrumCodingTest.iOS.Extensions;
 using UIKit;
 
 namespace MySpectrumCodingTest.iOS.ViewControllers
@@ -20,7 +19,17 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
+            //var g = new UITapGestureRecognizer(() => View.EndEditing(true));
+            //g.CancelsTouchesInView = false;
+            //View.AddGestureRecognizer(g);
             RegisterForKeyboardNotifications();
+        }
+        protected void TapToHideKeyboard(UIView View)
+        {
+            var g = new UITapGestureRecognizer(() => View.EndEditing(true));
+            g.CancelsTouchesInView = false;
+            View.AddGestureRecognizer(g);
+
         }
         protected bool TextFieldShouldReturn(UITextField textField)
         {
@@ -45,16 +54,13 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
 
         void OnKeyboardNotification(NSNotification notification)
         {
-            //Check if the keyboard is becoming visible
             bool visible = notification.Name == UIKeyboard.WillShowNotification;
 
-            //Start an animation, using values from the keyboard
             UIView.BeginAnimations("AnimateForKeyboard");
             UIView.SetAnimationBeginsFromCurrentState(true);
             UIView.SetAnimationDuration(UIKeyboard.AnimationDurationFromNotification(notification));
             UIView.SetAnimationCurve((UIViewAnimationCurve)UIKeyboard.AnimationCurveFromNotification(notification));
 
-            //Pass the notification, calculating keyboard height, etc.
             bool landscape = InterfaceOrientation == UIInterfaceOrientation.LandscapeLeft || InterfaceOrientation == UIInterfaceOrientation.LandscapeRight;
             if (visible)
             {
@@ -67,7 +73,6 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
                 OnKeyboardChanged(visible, landscape ? keyboardFrame.Width : keyboardFrame.Height);
             }
 
-            //Commit the animation
             UIView.CommitAnimations();
         }
         protected virtual void OnKeyboardChanged(bool visible, nfloat keyboardHeight)
@@ -94,7 +99,6 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
             scrollView.ContentInset = contentInsets;
             scrollView.ScrollIndicatorInsets = contentInsets;
 
-            // Position of the active field relative isnside the scroll view
             var relativeFrame = viewToCenter.Superview.ConvertRectToView(viewToCenter.Frame, scrollView);
 
             var landscape = this.InterfaceOrientation == UIInterfaceOrientation.LandscapeLeft
@@ -102,7 +106,6 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
 
             var spaceAboveKeyboard = (landscape ? scrollView.Frame.Width : scrollView.Frame.Height) - keyboardHeight;
 
-            // Move the active field to the center of the available space
             var offset = relativeFrame.Y - (spaceAboveKeyboard - viewToCenter.Frame.Height) / 2;
             scrollView.ContentOffset = new CGPoint(0, offset);
         }
@@ -111,28 +114,6 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
         {
             scrollView.ContentInset = UIEdgeInsets.Zero;
             scrollView.ScrollIndicatorInsets = UIEdgeInsets.Zero;
-        }
-    }
-    public class BaseViewController
-
-        <TViewModel> :
-        //:
-        UIViewController
-        //<TViewModel> :
-        //MvxViewController<TViewModel>
-        //    where TViewModel :
-        //        class, IMvxViewModel
-    {
-        //public ViewModel ViewModel { get; set; } 
-        public BaseViewController(IntPtr handle) : base(handle)
-        {
-        }
-        //public BaseViewController() : base(nameof(BaseViewController), null)
-        //public BaseViewController() : base(nameof(BaseViewController<TViewModel>), null)
-        //{
-        //}
-        public BaseViewController(string nibName,Foundation.NSBundle bundle) : base(nibName, bundle)
-        {
         }
     }
 }

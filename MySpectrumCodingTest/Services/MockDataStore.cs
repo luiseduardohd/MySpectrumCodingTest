@@ -14,6 +14,7 @@ namespace MySpectrumCodingTest
             users = new List<User>();
             var _users = new List<User>
             {
+                //Test Data
             };
 
             foreach (User user in _users)
@@ -24,6 +25,8 @@ namespace MySpectrumCodingTest
 
         public async Task<bool> AddAsync(User user)
         {
+            var nextId = users.Select(t => t.Id).DefaultIfEmpty().Max( id => id ) + 1;
+            user.Id = nextId;
             users.Add(user);
 
             return await Task.FromResult(true);
@@ -38,7 +41,7 @@ namespace MySpectrumCodingTest
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> DeleteAsync(string id)
+        public async Task<bool> DeleteAsync(int id)
         {
             var _user = users.Where((User arg) => arg.Id == id).FirstOrDefault();
             users.Remove(_user);
@@ -46,7 +49,16 @@ namespace MySpectrumCodingTest
             return await Task.FromResult(true);
         }
 
-        public async Task<User> GetAsync(string id)
+        public async Task<bool> DeleteAsync(User user)
+        {
+            var _user = users.Where((User arg) => arg.Id == user.Id).FirstOrDefault();
+            users.Remove(_user);
+
+            return await Task.FromResult(true);
+        }
+
+
+        public async Task<User> GetAsync(int id)
         {
             return await Task.FromResult(users.FirstOrDefault(s => s.Id == id));
         }
