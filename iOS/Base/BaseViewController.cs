@@ -41,6 +41,24 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
             }
             return false;
         }
+        protected void Bind(UITextField textField, Action<String> action, string text = null)
+        {
+            if (text != null)
+                textField.Text = text;
+            textField.AddTarget((s, e) => {
+                UITextField tf = s as UITextField;
+                action(tf.Text);
+            }, UIControlEvent.EditingChanged);
+            textField.ShouldReturn = TextFieldShouldReturn;
+        }
+        protected void Bind(UIButton button, bool hidden)
+        {
+            button.Hidden = hidden;
+        }
+        protected void Bind(UIButton btn, Command saveUserCommand)
+        {
+            btn.TouchUpInside += (s, e) => saveUserCommand.Execute(null);
+        }
 
         protected virtual void RegisterForKeyboardNotifications()
         {

@@ -32,56 +32,21 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
         {
             base.ViewDidLoad();
 
-            txtUsername.Layer.BorderWidth = 1.0f;
-            txtEmail.Layer.BorderWidth = 1.0f;
-            txtPassword.Layer.BorderWidth = 1.0f;
-            txtConfirmPassword.Layer.BorderWidth = 1.0f;
-
-            txtUsername.Text = UserViewModel.Username;
-            txtEmail.Text = UserViewModel.Email;
-            txtPassword.Text = UserViewModel.Password;
-
-            btnDeleteUser.Hidden = ! UserViewModel.IsDeleteEnabled;
-
-            txtUsername.AddTarget((s, e) => {
-                UITextField textField = s as UITextField;
-                UserViewModel.Username = textField.Text;
-            }, UIControlEvent.EditingChanged);
-            txtUsername.ShouldReturn = TextFieldShouldReturn;
-
-            txtEmail.AddTarget((s, e) => {
-                UITextField textField = s as UITextField;
-                UserViewModel.Email = textField.Text;
-            }, UIControlEvent.EditingChanged);
-            txtEmail.ShouldReturn = TextFieldShouldReturn;
-
-            txtPassword.AddTarget((s, e) => {
-                UITextField textField = s as UITextField;
-                UserViewModel.Password = textField.Text;
-            }, UIControlEvent.EditingChanged);
-            txtPassword.ShouldReturn = TextFieldShouldReturn;
-
-            txtConfirmPassword.AddTarget((s, e) => {
-                UITextField textField = s as UITextField;
-                UserViewModel.ConfirmPassword = textField.Text;
-            }, UIControlEvent.EditingChanged);
-            txtConfirmPassword.ShouldReturn = TextFieldShouldReturn;
-
-            btnSaveUser.TouchUpInside += async (s, e) =>
-            {
-                UserViewModel.SaveUserCommand.Execute(null);
-            };
-            btnDeleteUser.TouchUpInside += async (s, e) =>
-            {
-                UserViewModel.DeleteUserCommand.Execute(null);
-            };
+            Bind( txtUsername,   (x)=> UserViewModel.Username = x,   UserViewModel.Username);
+            Bind( txtEmail,      (x) => UserViewModel.Email = x,     UserViewModel.Email);
+            Bind( txtPassword,   (x) => UserViewModel.Password = x,  UserViewModel.Password);
+            Bind( txtConfirmPassword, (x) => UserViewModel.Password = x);
+            Bind( btnSaveUser,   UserViewModel.SaveUserCommand);
+            Bind( btnDeleteUser, !UserViewModel.IsDeleteEnabled);
+            Bind( btnDeleteUser, UserViewModel.DeleteUserCommand);
 
         }
+
+
         public override void DidReceiveMemoryWarning()
         {
             base.DidReceiveMemoryWarning();
         }
-
 
         public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)
         {

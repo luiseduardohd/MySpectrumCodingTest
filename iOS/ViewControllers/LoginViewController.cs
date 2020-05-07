@@ -31,39 +31,24 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
         public void LinkEvents()
         {
             this.Initialize();
-            txtUsername.Text = LoginViewModel.Username;
-            txtPassword.Text = LoginViewModel.Password;
 
+            Bind( txtUsername,   (x) => LoginViewModel.Username = x, LoginViewModel.Username);
+            Bind( txtPassword,   (x) => LoginViewModel.Password = x, LoginViewModel.Password);
+            Bind( btnSignIn,     LoginViewModel.LoginCommand);
+            Bind( btnTroubleSigningIn, LoginViewModel.TroubleSigningInCommand);
 
-            txtUsername.AddTarget((s, e) => {
-                UITextField textField = s as UITextField;
-                LoginViewModel.Username = textField.Text;
-            }, UIControlEvent.EditingChanged);
-            txtUsername.ShouldReturn = TextFieldShouldReturn;
-
-            txtPassword.AddTarget((s, e) => {
-                UITextField textField = s as UITextField;
-                LoginViewModel.Password =  textField.Text;
-            }, UIControlEvent.EditingChanged);
-            txtPassword.ShouldReturn = delegate
-            {
-                txtUsername.ResignFirstResponder();
-                LoginViewModel.LoginCommand.Execute(null);
-                return true;
-            };
-
-            btnSignIn.TouchUpInside += (object sender, EventArgs e) =>
-            {
-                LoginViewModel.LoginCommand.Execute(null);
-            };
-            btnTroubleSigningIn.TouchUpInside += (object sender, EventArgs e) =>
-            {
-                LoginViewModel.TroubleSigningInCommand.Execute(null);
-            };
+            txtPassword.ShouldReturn = PasswordShouldReturn;
 
             TapToHideKeyboard(View);
         }
 
+        private bool PasswordShouldReturn(UITextField textfield)
+        {
+            txtPassword.ResignFirstResponder();
+            LoginViewModel.LoginCommand.Execute(null);
+            return true;
+
+        }
 
         public override void DidReceiveMemoryWarning()
         {
