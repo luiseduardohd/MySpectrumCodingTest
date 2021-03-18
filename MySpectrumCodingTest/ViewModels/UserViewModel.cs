@@ -99,6 +99,15 @@ namespace MySpectrumCodingTest.ViewModels
                 }
 
             }
+            else
+            {
+                var n = Environment.NewLine;
+                var allErrors = $@"
+{String.Join($".{n}", await GetEmailErrors(Email))}
+{String.Join($".{n}", GetPasswordErrors(Password) )}
+{String.Join($".{n}", GetConfirmPasswordErrors(Password, ConfirmPassword))}";
+                await Dialogs.AlertAsync(allErrors, "Error");
+            }
             return;
         }
         private async void DeleteUser()
@@ -224,12 +233,12 @@ namespace MySpectrumCodingTest.ViewModels
 
         private bool IsValidEmail()
         {
-            return EmailErrors.Count == 0;
+            return Email != null && Email != String.Empty && EmailErrors.Count == 0;
         }
 
         private bool IsValidPassword()
         {
-            return PasswordErrors.Count == 0;
+            return Password!=null && Password != String.Empty && PasswordErrors.Count == 0;
         }
 
     }
