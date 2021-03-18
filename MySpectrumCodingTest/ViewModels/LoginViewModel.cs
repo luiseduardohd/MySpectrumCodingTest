@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Threading.Tasks;
-using Acr.UserDialogs;
 using System.Linq;
-using Plugin.Share;
-using Plugin.Share.Abstractions;
-using System.Diagnostics;
+using Xamarin.Essentials;
 
 namespace MySpectrumCodingTest.ViewModels
 {
@@ -20,7 +16,7 @@ namespace MySpectrumCodingTest.ViewModels
         public Command LoginCommand { get; private set; }
 
         public Command SignInCommand { get;  set; }
-        public Command TroubleSigningInCommand { get;  set; }
+        public Command TroubleSigningInCommand { get; set; }
 
         #endregion
 
@@ -52,8 +48,12 @@ namespace MySpectrumCodingTest.ViewModels
 
                 completeAction?.Invoke();
             });
-            TroubleSigningInCommand = new Command(() => CrossShare.Current.OpenBrowser("https://id.spectrum.net/recover",new BrowserOptions() {SafariControlTintColor = new ShareColor(255,255,255), SafariBarTintColor = new ShareColor(62, 146, 241), UseSafariWebViewController=true}));
-            
+            TroubleSigningInCommand = new Command(
+                async () =>
+                {
+                    await Browser.OpenAsync("https://id.spectrum.net/recover", BrowserLaunchMode.SystemPreferred);
+                }
+            );            
         }
         private async Task<bool> IsValidLogin()
         {

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 //using SQLite.Net.Async;
 using SQLite;
 using MySpectrumCodingTest.Extensions;
+using System.Threading;
 
 namespace MySpectrumCodingTest.Services
 {
@@ -21,21 +22,29 @@ namespace MySpectrumCodingTest.Services
         });
         static SQLiteAsyncConnection Database => lazyInitializer.Value;
         private bool initialized;
+        private readonly SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
 
         public SqliteDataStore()
         {
-            InitializeAsync().SafeFireAndForget(false);
         }
 
         public async Task InitializeAsync()
         {
-            if (!initialized)
+            await _semaphore.WaitAsync();
+            try
             {
-                if (!Database.TableMappings.Any(m => m.MappedType.Name == typeof(User).Name))
+                if (!initialized)
                 {
-                    _ = await Database.CreateTablesAsync(CreateFlags.None, typeof(User));
-                    initialized = true;
+                    if (!Database.TableMappings.Any(m => m.MappedType.Name == typeof(User).Name))
+                    {
+                        _ = await Database.CreateTablesAsync(CreateFlags.None, typeof(User));
+                        initialized = true;
+                    }
                 }
+            }
+            finally
+            {
+                _semaphore.Release();
             }
         }
 
