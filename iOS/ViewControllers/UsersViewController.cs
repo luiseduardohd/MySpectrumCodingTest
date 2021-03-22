@@ -64,7 +64,7 @@ namespace MySpectrumCodingTest.iOS
                 var indexPath = TableView.IndexPathForCell(sender as UITableViewCell);
                 var user = ViewModel.Users[indexPath.Row];
 
-                controller.UserViewModel = new UserViewModel(user);
+                controller.ViewModel = new UserViewModel(user);
                 controller.Initialize();
             }
         }

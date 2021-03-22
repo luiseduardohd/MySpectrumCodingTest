@@ -9,8 +9,42 @@ namespace MySpectrumCodingTest.ViewModels
     public class LoginViewModel : BaseViewModel
     {
         #region Fields
-        public string Username { get; set; }
-        public string Password { get; set; }
+        private string _username;
+        public string Username
+        {
+            get { return _username; }
+            set
+            {
+                _username = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(CanLogin));
+            }
+        }
+
+
+        private string _password;
+        public string Password
+        {
+            get { return _password; }
+            set
+            {
+                _password = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(CanLogin));
+            }
+        }
+
+        private bool _canLogin = false;
+        public bool CanLogin
+        {
+            get
+            {
+                if (!String.IsNullOrWhiteSpace(_username) && !String.IsNullOrWhiteSpace(_password))
+                    return true;
+                else
+                    return false;
+            }
+        }
 
         public ObservableCollection<User> Users { get; set; }
         public Command LoginCommand { get; private set; }
@@ -30,14 +64,21 @@ namespace MySpectrumCodingTest.ViewModels
         {
 
             LoginCommand = new Command(async (o)=> {
-                bool success = await IsValidLogin();
-                if ( ! success )
+                using (this.Dialogs.Loading("Loading"))
                 {
-                    using (this.Dialogs.Loading("Loading"))
-                    {
-                        await Task.Delay(2000);
-                    }
-                    await Dialogs.AlertAsync("There was a problem authenticating the user. Please verify your credentials");
+                    await Task.Delay(1000);
+                }
+                bool accountExist = await AccountExist();
+                if (!accountExist)
+                {
+                    await Dialogs.AlertAsync("The account doesn’t exist");
+                    return;
+                }
+
+                bool isValidPassword = await IsValidPassword();
+                if ( !isValidPassword)
+                {
+                    await Dialogs.AlertAsync("The password is incorrect");
                     return;
                 }
 
@@ -55,7 +96,7 @@ namespace MySpectrumCodingTest.ViewModels
                 }
             );            
         }
-        private async Task<bool> IsValidLogin()
+        private async Task<bool> IsValidPassword()
         {
             bool success = false;
             var users = await UsersDataStore.GetAllAsync(true);
@@ -66,6 +107,24 @@ namespace MySpectrumCodingTest.ViewModels
                 x.Email == Username
             )
             && x.Password == Password);
+
+            if (user == null)
+                success = false;
+            else
+                success = true;
+
+            return success;
+        }
+        private async Task<bool> AccountExist()
+        {
+            bool success = false;
+            var users = await UsersDataStore.GetAllAsync(true);
+            var user = users.FirstOrDefault(x =>
+            (
+                x.Username == Username
+                ||
+                x.Email == Username
+            ));
 
             if (user == null)
                 success = false;

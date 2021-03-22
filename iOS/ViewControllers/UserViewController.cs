@@ -10,35 +10,35 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
 {
     public partial class UserViewController : BaseViewController
     {
-        public UserViewModel UserViewModel { get; set; }
+        public override object ViewModel { get; set; }
 
         public UserViewController(IntPtr handle) : base(handle)
         {
-            UserViewModel = new UserViewModel();
+            ViewModel = new UserViewModel();
             Initialize();
         }
         public UserViewController() : base(nameof(UserViewController), null)
         {
-            UserViewModel = new UserViewModel();
+            ViewModel = new UserViewModel();
             Initialize();
         }
         public void Initialize()
         {
-            UserViewModel.Initialize(this.CompleteAction, this.DeleteAction, this.UseEmailErrors, this.UsePasswordErrors, this.UseConfirmPasswordErrors);
+            (ViewModel as UserViewModel).Initialize(this.CompleteAction, this.DeleteAction, this.UseEmailErrors, this.UsePasswordErrors, this.UseConfirmPasswordErrors);
         }
 
 
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-
-            Bind( txtUsername,   (x)=> UserViewModel.Username = x,   UserViewModel.Username);
-            Bind( txtEmail,      (x) => UserViewModel.Email = x,     UserViewModel.Email);
-            Bind( txtPassword,   (x) => UserViewModel.Password = x,  UserViewModel.Password);
-            Bind( txtConfirmPassword, (x) => UserViewModel.Password = x);
-            Bind( btnSaveUser,   UserViewModel.SaveUserCommand);
-            Bind( btnDeleteUser, !UserViewModel.IsDeleteEnabled);
-            Bind( btnDeleteUser, UserViewModel.DeleteUserCommand);
+            var viewModel = ViewModel as UserViewModel;
+            Bind( txtUsername,   (x)=> viewModel.Username = x, viewModel.Username);
+            Bind( txtEmail,      (x) => viewModel.Email = x, viewModel.Email);
+            Bind( txtPassword,   (x) => viewModel.Password = x, viewModel.Password);
+            Bind( txtConfirmPassword, (x) => viewModel.Password = x);
+            Bind( btnSaveUser, viewModel.SaveUserCommand);
+            Bind( btnDeleteUser, !viewModel.IsDeleteEnabled);
+            Bind( btnDeleteUser, viewModel.DeleteUserCommand);
 
         }
 

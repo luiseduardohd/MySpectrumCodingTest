@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Diagnostics;
 using CoreGraphics;
 using Foundation;
 using MySpectrumCodingTest.iOS.Extensions;
@@ -6,8 +8,9 @@ using UIKit;
 
 namespace MySpectrumCodingTest.iOS.ViewControllers
 {
-    public class BaseViewController : UIViewController
+    public abstract class BaseViewController : UIViewController
     {
+        abstract public object ViewModel { get; set; }
 
         public BaseViewController(IntPtr handle) : base(handle)
         {
@@ -58,6 +61,18 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
         protected void Bind(UIButton btn, Command saveUserCommand)
         {
             btn.TouchUpInside += (s, e) => saveUserCommand.Execute(null);
+        }
+        protected void Bind(UIButton btn,string viewPropertyString, string viewModelPropertyString)
+        {
+            var viewModelProperty = ViewModel.GetType().GetProperty(viewModelPropertyString);
+            var viewProperty = typeof(UIButton).GetProperty(viewPropertyString);
+            viewProperty.SetValue(btn, viewModelProperty.GetValue(ViewModel));
+            var notifyPropertyChanged = ViewModel as INotifyPropertyChanged;
+            notifyPropertyChanged.PropertyChanged += (sender, e) =>
+                {
+                    viewProperty.SetValue(btn, viewModelProperty.GetValue(ViewModel));
+                }
+            ;
         }
 
         protected virtual void RegisterForKeyboardNotifications()

@@ -6,8 +6,7 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
 {
     public partial class LoginViewController : BaseViewController
     {
-        public LoginViewModel LoginViewModel { get; set; }
-
+        public override object ViewModel { get ; set ; }
 
         public LoginViewController(IntPtr handle) : base(handle)
         {
@@ -19,7 +18,7 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
         }
         public void Initialize()
         {
-            LoginViewModel = new LoginViewModel(completeAction);
+            ViewModel = new LoginViewModel(completeAction);
         }
 
         public override void ViewDidLoad()
@@ -31,11 +30,12 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
         public void LinkEvents()
         {
             this.Initialize();
-
-            Bind( txtUsername,   (x) => LoginViewModel.Username = x, LoginViewModel.Username);
-            Bind( txtPassword,   (x) => LoginViewModel.Password = x, LoginViewModel.Password);
-            Bind( btnSignIn,     LoginViewModel.LoginCommand);
-            Bind( btnTroubleSigningIn, LoginViewModel.TroubleSigningInCommand);
+            var viewModel = ViewModel as LoginViewModel;
+            Bind( txtUsername,   (x) => viewModel.Username = x, viewModel.Username);
+            Bind( txtPassword,   (x) => viewModel.Password = x, viewModel.Password);
+            Bind( btnSignIn, viewModel.LoginCommand);
+            Bind(btnSignIn, nameof(btnSignIn.Enabled), nameof(viewModel.CanLogin));
+            Bind( btnTroubleSigningIn, viewModel.TroubleSigningInCommand);
 
             txtPassword.ShouldReturn = PasswordShouldReturn;
 
@@ -45,7 +45,7 @@ namespace MySpectrumCodingTest.iOS.ViewControllers
         private bool PasswordShouldReturn(UITextField textfield)
         {
             txtPassword.ResignFirstResponder();
-            LoginViewModel.LoginCommand.Execute(null);
+            (ViewModel as LoginViewModel).LoginCommand.Execute(null);
             return true;
 
         }
