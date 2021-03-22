@@ -81,7 +81,7 @@ namespace MySpectrumCodingTest.ViewModels
                     await Dialogs.AlertAsync("The password is incorrect");
                     return;
                 }
-
+                Dialogs.Toast("Login Successful");
                 using (this.Dialogs.Loading("Loading"))
                 {
                     await Task.Delay(2000);
