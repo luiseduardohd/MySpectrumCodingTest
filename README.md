@@ -8,6 +8,23 @@ This is a coding test project for Spectrum, built using Xamarin for cross-platfo
 - Loading indicators for login and user creation processes
 - User list display
 
+## Coding Test Description
+
+This project is a solution to the MySpectrum Xamarin Practical Coding Test. The requirements for the test include:
+
+- Implementing a production-ready solution to accept a new username, validate a password, and store user data locally.
+- The project must be written in C#/Xamarin with a native UI for either Android or iOS (not Xamarin Forms).
+
+### UI Requirements:
+1. A page displaying a list of users and their information.
+2. A feature to add a new user, which brings up a new screen and appends the user to the list.
+3. Real-time and submission-time validation for passwords.
+
+### Password Validation Rules:
+1. Must contain both letters and numerical digits, with at least one of each.
+2. Must be between 5 and 12 characters in length.
+3. Must not contain any sequence of characters immediately followed by the same sequence.
+
 ## Screenshots
 
 ### Login Process
